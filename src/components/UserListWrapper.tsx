@@ -4,10 +4,7 @@ import { theme } from "styled-tools";
 import styled from "styled-components";
 import UserList from "./UserList";
 
-import { ReactComponent as ArrowLeft } from "../assets/icons/arrowLeft.svg";
-import { ReactComponent as ArrowLeftActive } from "../assets/icons/arrowLeftActive.svg";
-// import { ReactComponent as ArrowRight } from "../assets/icons/arrowRight.svg";
-import { ReactComponent as ArrowRightActive } from "../assets/icons/arrowRightActive.svg";
+import { ArrowLeft, ArrowLeftActive, ArrowRightActive } from "../assets";
 
 export default function UserListWrapper() {
   const [pageCnt, setPageCnt] = useState(1);
