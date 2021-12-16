@@ -33,7 +33,7 @@ const fonts = {
   `,
   korRegularBold: `
     font-family: NotoSansKR-Bold;
-    letter-spacing: -0.25em;
+    letter-spacing: -0.025em;
     line-height: 1.2em;
     font-size: ${fontSizes.korRegularBold};
   `,
