@@ -1,27 +1,55 @@
 const calcRem = (size) => `${size / 10}rem`;
 const fontSizes = {
-  headLint: calcRem(45),
-  title: calcRem(30),
-  display: calcRem(28),
-  subTitle1: calcRem(20),
-  subTitle2: calcRem(24),
-  paragraph2: calcRem(16),
-  paragraph1: calcRem(14),
-  caption: calcRem(12),
-  page: calcRem(10),
+  engBold: calcRem(28),
+  engRegular: calcRem(18),
+  korBold: calcRem(20),
+  korRegular: calcRem(14),
+  korRegularBold: calcRem(14),
+};
+
+const fonts = {
+  engBold: `
+    font-family: Roboto-Bold;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-size: ${fontSizes.headLine};
+  `,
+  engRegular: `
+    font-family: Roboto;
+    letter-spacing: -0.02em;
+    line-height: 1.2em;
+    font-size: ${fontSizes.headLine};
+  `,
+  korBold: `
+    font-family: NotoSansKR-Bold;
+    line-height: 1;
+    font-size: ${fontSizes.headLine};
+  `,
+  korRegular: `
+    font-family: NotoSansKR;
+    line-height: 1.2em;
+    font-size: ${fontSizes.headLine};
+  `,
+  korRegularBold: `
+    font-family: NotoSansKR-Bold;
+    letter-spacing: -0.25em;
+    line-height: 1.2em;
+    font-size: ${fontSizes.headLine};
+  `,
 };
 
 const colors = {
-  gray100: "#FBFBFB",
-  gray200: "#F6F6F6",
-  gray300: "#DDDDDD",
-  gray400: "#BFBFBF",
-  gray500: "#999999",
-  gray600: "#959595",
-  gray700: "#666666",
-  black: "#333333",
-  white: "#FFFFFF",
-  main: "#00C3BD",
+  bgColor: "#EBEBEB",
+  textBlack: "#484848",
+  textGray: "#BBBBBB",
+  textRed: "#ED5974",
+  bgWhite: "#F9F9F9",
+  pointWhite: "#FFFFFF",
+  graphPink: "#F1B0BC",
+  graphGreen: "#97CDBD",
+  graphGray: "#555555",
+  graphLineGray: "#E3E3E3",
+  mainColor: "#31D692",
 };
 
 const deviceSizes = {

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { theme } from "styled-tools";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -15,29 +16,9 @@ export const GlobalStyle = createGlobalStyle`
     src: url("/fonts/NotoSansKR-Regular.otf") format("opentype");
   }
 
-  @font-face {
-    font-family: "NotoSansKR";
-    font-weight: normal;
-    font-style: normal;
-    src: url("/fonts/NotoSansKR-Light.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: "NanumMyeongjo";
-    font-weight: normal;
-    font-style: normal;
-    src: url("/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
-  }
-
-  @font-face {
-    font-family: "Georgia";
-    font-weight: normal;
-    font-style: normal;
-    src: url("/fonts/georgia italic.ttf") format("truetype");
-  }
 
   html {
-    color: #333333;
+    color: ${theme("colors.textBlack")};
     font-family: NotoSansKR;
   }
 
@@ -52,12 +33,6 @@ export const GlobalStyle = createGlobalStyle`
     background-color: transparent;                                                                                                                                                                        
   }
 
-  button {
-    cursor: pointer;
-    border: 0.1rem solid ${({ theme }) => theme.colors.gray600};
-    display: flex;
-    align-items: center;
-  }
 `;
 
 export default GlobalStyle;
