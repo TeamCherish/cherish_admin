@@ -1,4 +1,4 @@
-import { USER_LIST, DATE_JOIN_LIST } from "./tempData";
+import { USER_LIST, DATE_JOIN_LIST, PLANT_LIST } from "./tempData";
 
 export const getUserList = async () => {
   return USER_LIST;
