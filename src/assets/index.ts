@@ -1,0 +1,9 @@
+export { default as plant1 } from "./images/plant1.png";
+export { default as plant2 } from "./images/plant2.png";
+export { default as plant3 } from "./images/plant3.png";
+export { default as plant4 } from "./images/plant4.png";
+export { default as plant5 } from "./images/plant5.png";
+export { ReactComponent as ArrowLeft } from "./icons/arrowLeft.svg";
+export { ReactComponent as ArrowLeftActive } from "./icons/arrowLeftActive.svg";
+export { ReactComponent as ArrowRight } from "./icons/arrowRight.svg";
+export { ReactComponent as ArrowRightActive } from "./icons/arrowRightActive.svg";

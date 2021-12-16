@@ -24,17 +24,19 @@ const fonts = {
   korBold: `
     font-family: NotoSansKR-Bold;
     line-height: 1;
+    font-weight: bold;
     font-size: ${fontSizes.korBold};
-  `,
-  korRegular: `
+    `,
+    korRegular: `
     font-family: NotoSansKR;
     line-height: 1.2em;
     font-size: ${fontSizes.korRegular};
-  `,
-  korRegularBold: `
-    font-family: NotoSansKR-Bold;
-    letter-spacing: -0.25em;
-    line-height: 1.2em;
+    `,
+    korRegularBold: `
+    font-family: NotoSansKR;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    font-weight: bold;
     font-size: ${fontSizes.korRegularBold};
   `,
 };
