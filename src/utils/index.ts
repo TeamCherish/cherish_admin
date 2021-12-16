@@ -7,3 +7,11 @@ export const getUserList = async () => {
 export const getDateJoinList = async () => {
   return DATE_JOIN_LIST;
 };
+
+export const getUserInfo = async (id: number) => {
+  return USER_LIST.filter(user => user.id === id)[0];
+};
+
+export const getPlantList = async () => {
+  return PLANT_LIST;
+};

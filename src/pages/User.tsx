@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import UserListWrapper from "components/UserListWrapper";
 
+import { UserDetail } from "components";
+
 export default function User() {
   return (
     <StWrapper>
       <UserListWrapper />
-      userPage
+      <UserDetail />
     </StWrapper>
   );
 }
