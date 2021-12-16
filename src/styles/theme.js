@@ -64,6 +64,7 @@ const device = {
 
 const theme = {
   fontSizes,
+  fonts,
   colors,
   deviceSizes,
   device,
