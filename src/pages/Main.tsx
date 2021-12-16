@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-
+import { theme } from "styled-tools";
 import Header from "../components/common/Header";
 
 export default function Main() {
@@ -16,4 +16,7 @@ const StWrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width:100%;
+  height:138.6rem;
+  background-color: ${theme("colors.bgColor")};
 `;

@@ -9,13 +9,14 @@ const fontSizes = {
 
 const fonts = {
   engBold: `
-    font-family: Roboto-Bold;
+    font-family: Roboto;
+    font-weight: bold;
     letter-spacing: -0.02em;
     line-height: 1;
     font-size: ${fontSizes.engBold};
   `,
   engRegular: `
-    font-family: Roboto;
+    font-family: Roboto;   
     letter-spacing: -0.02em;
     line-height: 1.2em;
     font-size: ${fontSizes.engRegular};
@@ -23,17 +24,19 @@ const fonts = {
   korBold: `
     font-family: NotoSansKR-Bold;
     line-height: 1;
+    font-weight: bold;
     font-size: ${fontSizes.korBold};
-  `,
+    `,
   korRegular: `
     font-family: NotoSansKR;
     line-height: 1.2em;
     font-size: ${fontSizes.korRegular};
-  `,
+    `,
   korRegularBold: `
-    font-family: NotoSansKR-Bold;
-    letter-spacing: -0.25em;
+    font-family: NotoSansKR;
+    letter-spacing: -0.025em;
     line-height: 1.2em;
+    font-weight: bold;
     font-size: ${fontSizes.korRegularBold};
   `,
 };
