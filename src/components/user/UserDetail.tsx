@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { UserInfo, PlantList } from "..";
 
 export default function UserDetail() {

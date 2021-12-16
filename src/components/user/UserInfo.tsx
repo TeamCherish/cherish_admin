@@ -6,16 +6,17 @@ import { getUserInfo } from "utils";
 import { User } from "utils/tempData";
 import { theme } from "styled-tools";
 
-const TEMP_USER_ID = 5;
+const TEMP_USER_ID: number = 5;
+const INITIAL_PROPS: User = {
+  id: 1,
+  name: "01짱구엄마",
+  email: "temp@temp.com",
+  phoneNum: "0000",
+  contactCount: "00",
+};
 
 export default function UserInfo() {
-  const [userInfo, setUserInfo] = useState<User>({
-    id: 1,
-    name: "01짱구엄마",
-    email: "temp@temp.com",
-    phoneNum: "0000",
-    contactCount: "00",
-  });
+  const [userInfo, setUserInfo] = useState<User>(INITIAL_PROPS);
 
   useEffect(() => {
     (async function () {
@@ -23,10 +24,6 @@ export default function UserInfo() {
       setUserInfo(data);
     })();
   });
-
-  useEffect(() => {
-    console.log(`userInfo`, userInfo);
-  }, [userInfo]);
 
   return (
     <StWrapper>
