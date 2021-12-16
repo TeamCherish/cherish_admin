@@ -1,4 +1,4 @@
-interface User {
+export interface User {
     id: number;
     name: string;
     email: string;
@@ -6,7 +6,7 @@ interface User {
     contactCount: string;
 }
 
-export const USERLIST: User[] = [
+export const USER_LIST: User[] = [
     {id: 1, name: "01짱구엄마", email: "temp@temp.com", phoneNum: "0000", contactCount: "00"},
     {id: 2, name: "02짱구엄마", email: "temp@temp.com", phoneNum: "0000", contactCount: "00"},
     {id: 3, name: "03짱구엄마", email: "temp@temp.com", phoneNum: "0000", contactCount: "00"},

@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
+import { UserDetail } from "components";
+
 export default function User() {
-  return <StWrapper>userPage</StWrapper>;
+  return (
+    <StWrapper>
+      userPage
+      <UserDetail />
+    </StWrapper>
+  );
 }
 
 const StWrapper = styled.section`

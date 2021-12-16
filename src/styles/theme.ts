@@ -1,5 +1,6 @@
 const calcRem = (size) => `${size / 10}rem`;
 const fontSizes = {
+  korTitle: calcRem(30),
   engBold: calcRem(28),
   engRegular: calcRem(18),
   korBold: calcRem(20),
@@ -36,6 +37,12 @@ const fonts = {
     letter-spacing: -0.25em;
     line-height: 1.2em;
     font-size: ${fontSizes.korRegularBold};
+  `,
+  korTitleBold: `
+    font-family: NotoSansKR;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    font-size: ${fontSizes.korTitle};
   `,
 };
 

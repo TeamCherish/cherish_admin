@@ -1,9 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Dashboard from "../pages/Dashboard";
-import Login from "../pages/Login";
-import Main from "../pages/Main";
-import User from "../pages/User";
+import { Dashboard, Login, Main, User } from "pages";
 
 export default function Router() {
   return (
