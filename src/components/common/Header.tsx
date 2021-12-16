@@ -6,20 +6,20 @@ import logoutIcon from "../../assets/icons/logout.svg"
 export default function Header() {
   return (
     <StHeader>
-      <MenuWrapper>
-        <Logo>
-          <LogoImage src={cherishLogo}></LogoImage>
+      <StMenuWrapper>
+        <StLogo>
+          <StLogoImage src={cherishLogo}></StLogoImage>
           <span>Cherish Admin</span>
-        </Logo>
-        <MenuList>
-          <Dashboard>Cherish Dashboard</Dashboard>
-          <User>Users</User>
-        </MenuList>
-      </MenuWrapper>
-      <LogoutWrapper>
-        <LogoutIcon src={logoutIcon}></LogoutIcon>
+        </StLogo>
+        <StMenuList>
+          <StDashboard>Cherish Dashboard</StDashboard>
+          <StUser>Users</StUser>
+        </StMenuList>
+      </StMenuWrapper>
+      <StLogoutWrapper>
+        <StLogoutIcon src={logoutIcon}></StLogoutIcon>
         <span>logout</span>
-      </LogoutWrapper>
+      </StLogoutWrapper>
     </StHeader>
     
   );
@@ -33,59 +33,55 @@ const StHeader = styled.div`
   width: 100%;
 `;
 
-const MenuWrapper = styled.div`
+const StMenuWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const Logo = styled.div`
+const StLogo = styled.div`
   display: flex;
   align-items: center;
   margin-right: 5.5rem;
 
   & > span{
-    font-size: ${theme("fontSizes.engBold")};
     font-family: ${theme("fonts.engBold")};
     color: ${theme("colors.mainColor")};
   }
 `;
 
-const LogoImage = styled.img`
+const StLogoImage = styled.img`
   margin-right: 1.5rem;
   width: 3.2rem;
   height: 4.6rem;
 `;
 
-const MenuList = styled.div`
+const StMenuList = styled.div`
   display: flex;
 `;
 
-const Dashboard = styled.div`
+const StDashboard = styled.div`
   font-family: ${theme("fonts.engBold")};
-  font-size: ${theme("fontSizes.engBold")};
   color: ${theme("colors.textBlack")};
   margin-right: 5.2rem;
 `;
 
-const User = styled.div`
+const StUser = styled.div`
   font-family: ${theme("fonts.engBold")};
-  font-size: ${theme("fontSizes.engBold")};
   color: ${theme("colors.textGray")};
 `;
 
-const LogoutWrapper = styled.div`
+const StLogoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   & > span{
     font-family: ${theme("fonts.engRegular")};
-    font-size: ${theme("fontSizes.engRegular")};
     color: ${theme("colors.textBlack")};
   }
 `;
 
-const LogoutIcon = styled.img`
+const StLogoutIcon = styled.img`
   width: 5.5rem;
   height: 5.5rem;
 `;
