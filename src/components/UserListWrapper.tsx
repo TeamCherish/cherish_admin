@@ -4,6 +4,11 @@ import { theme } from "styled-tools";
 import styled from "styled-components";
 import UserList from "./UserList";
 
+import { ReactComponent as ArrowLeft } from "../assets/icons/arrowLeft.svg";
+import { ReactComponent as ArrowLeftActive } from "../assets/icons/arrowLeftActive.svg";
+import { ReactComponent as ArrowRight } from "../assets/icons/arrowRight.svg";
+import { ReactComponent as ArrowRightActive } from "../assets/icons/arrowRightActive.svg";
+
 export default function UserListWrapper() {
   const [pageCnt, setPageCnt] = useState(1);
 
@@ -19,14 +24,18 @@ export default function UserListWrapper() {
   return (
     <Test>
       <StUserListWrapper>
-        <StPageWrapper>
+        <StTopWrapper>
           <StH3>사용자 목록</StH3>
-          <div>
-            <button onClick={goPrevPage}>sdaf</button>
+          <StPageWrapper>
+            {pageCnt === 1 ? (
+              <ArrowLeft />
+            ) : (
+              <ArrowLeftActive onClick={goPrevPage} />
+            )}
             <StPageCnt>{pageCnt}</StPageCnt>
-            <button onClick={goNextPage}>asdf</button>
-          </div>
-        </StPageWrapper>
+            <ArrowRightActive onClick={goNextPage} />
+          </StPageWrapper>
+        </StTopWrapper>
         <UserList />
       </StUserListWrapper>
     </Test>
@@ -46,7 +55,7 @@ const StUserListWrapper = styled.article`
   background-color: ${theme("colors.bgWhite")};
 `;
 
-const StPageWrapper = styled.div`
+const StTopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -56,6 +65,13 @@ const StH3 = styled.h3`
   weight: 700;
 `;
 
+const StPageWrapper = styled.div`
+  width: 6rem;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const StPageCnt = styled.span`
+  width: 1rem;
   font-size: 1.8rem;
 `;
