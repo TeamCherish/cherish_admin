@@ -6,7 +6,7 @@ import UserList from "./UserList";
 
 import { ReactComponent as ArrowLeft } from "../assets/icons/arrowLeft.svg";
 import { ReactComponent as ArrowLeftActive } from "../assets/icons/arrowLeftActive.svg";
-import { ReactComponent as ArrowRight } from "../assets/icons/arrowRight.svg";
+// import { ReactComponent as ArrowRight } from "../assets/icons/arrowRight.svg";
 import { ReactComponent as ArrowRightActive } from "../assets/icons/arrowRightActive.svg";
 
 export default function UserListWrapper() {
@@ -64,6 +64,8 @@ const StTopWrapper = styled.div`
 const StH3 = styled.h3`
   font-size: 2rem;
   weight: 700;
+
+  ${theme("fonts.korBold")};
 `;
 
 const StPageWrapper = styled.div`
