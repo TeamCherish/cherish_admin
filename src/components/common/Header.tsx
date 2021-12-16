@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { theme } from "styled-tools";
+import { Link } from "react-router-dom";
 import cherishLogo from "../../assets/images/cherish_logo.png"
 import logoutIcon from "../../assets/icons/logout.svg"
+
 
 export default function Header() {
   return (
@@ -12,8 +14,8 @@ export default function Header() {
           <span>Cherish Admin</span>
         </StLogo>
         <StMenuList>
-          <StDashboard>Cherish Dashboard</StDashboard>
-          <StUser>Users</StUser>
+          <Link to="/dashboard">Cherish Dashboard</Link>
+          <Link to="/users">Users</Link>
         </StMenuList>
       </StMenuWrapper>
       <StLogoutWrapper>
@@ -57,18 +59,19 @@ const StLogoImage = styled.img`
 
 const StMenuList = styled.div`
   display: flex;
+  justify-content: space-between;
+  font-family: ${theme("fonts.engBold")};
+  width: 32.4rem;
+
+  & > a{
+    color: ${theme("colors.textGray")};
+  }
+
+  & > a:hover{
+    color: ${theme("colors.textBlack")};
+  }
 `;
 
-const StDashboard = styled.div`
-  font-family: ${theme("fonts.engBold")};
-  color: ${theme("colors.textBlack")};
-  margin-right: 5.2rem;
-`;
-
-const StUser = styled.div`
-  font-family: ${theme("fonts.engBold")};
-  color: ${theme("colors.textGray")};
-`;
 
 const StLogoutWrapper = styled.div`
   display: flex;
