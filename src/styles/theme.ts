@@ -45,10 +45,10 @@ const colors = {
   textRed: "#ED5974",
   bgWhite: "#F9F9F9",
   pointWhite: "#FFFFFF",
-  graphPink: "#F1B0BC",
-  graphGreen: "#97CDBD",
-  graphGray: "#555555",
-  graphLineGray: "#E3E3E3",
+  chartPink: "#F1B0BC",
+  chartGreen: "#97CDBD",
+  chartGray: "#555555",
+  chartLineGray: "#E3E3E3",
   mainColor: "#31D692",
 };
 

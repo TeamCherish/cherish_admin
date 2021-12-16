@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     color: ${theme("colors.textBlack")};
     font-family: NotoSansKR;
+    font-size: 10px;
   }
 
   a {
