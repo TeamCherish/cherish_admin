@@ -9,13 +9,14 @@ const fontSizes = {
 
 const fonts = {
   engBold: `
-    font-family: Roboto-Bold;
+    font-family: Roboto;
+    font-weight: bold;
     letter-spacing: -0.02em;
     line-height: 1;
     font-size: ${fontSizes.engBold};
   `,
   engRegular: `
-    font-family: Roboto;
+    font-family: Roboto;   
     letter-spacing: -0.02em;
     line-height: 1.2em;
     font-size: ${fontSizes.engRegular};
