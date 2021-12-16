@@ -5,7 +5,7 @@ import logoutIcon from "../../assets/icons/logout.svg"
 
 export default function Header() {
   return (
-    <StyledHeader>
+    <StHeader>
       <MenuWrapper>
         <Logo>
           <LogoImage src={cherishLogo}></LogoImage>
@@ -20,12 +20,12 @@ export default function Header() {
         <LogoutIcon src={logoutIcon}></LogoutIcon>
         <span>logout</span>
       </LogoutWrapper>
-    </StyledHeader>
+    </StHeader>
     
   );
 }
 
-const StyledHeader = styled.div`
+const StHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,7 +83,6 @@ const LogoutWrapper = styled.div`
     font-size: ${theme("fontSizes.engRegular")};
     color: ${theme("colors.textBlack")};
   }
-
 `;
 
 const LogoutIcon = styled.img`
