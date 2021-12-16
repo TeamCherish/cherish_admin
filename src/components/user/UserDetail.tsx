@@ -1,11 +1,35 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { UserInfo, PlantList } from "..";
+import { getUserInfo } from "utils";
+import { User } from "utils/tempData";
+import { PlantList, UserInfo } from "..";
+import { plant1 } from "assets";
+import { theme } from "styled-tools";
+
+const TEMP_USER_ID: number = 5;
+const INITIAL_PROPS: User = {
+  id: 0,
+  image: "",
+  name: "temp",
+  email: "temp@temp.com",
+  phoneNum: "0000",
+  contactCount: "00",
+};
 
 export default function UserDetail() {
+  const [userInfo, setUserInfo] = useState<User>(INITIAL_PROPS);
+
+  useEffect(() => {
+    (async function () {
+      const userData: User = await getUserInfo(TEMP_USER_ID);
+      setUserInfo({ ...userData, image: plant1 });
+    })();
+  });
+
   return (
     <StWrapper>
-      <UserInfo />
+      <UserInfo userInfo={userInfo} />
       <PlantList />
     </StWrapper>
   );
@@ -15,5 +39,7 @@ const StWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 18rem 4.7rem 10rem 4.7rem; */
+  gap: 7rem;
+  padding: 18rem 4.7rem 10rem 4.7rem;
+  background-color: ${theme("colors.bgWhite")};
 `;
