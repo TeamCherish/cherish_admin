@@ -12,29 +12,29 @@ const fonts = {
     font-family: Roboto-Bold;
     letter-spacing: -0.02em;
     line-height: 1;
-    font-size: ${fontSizes.headLine};
+    font-size: ${fontSizes.engBold};
   `,
   engRegular: `
     font-family: Roboto;
     letter-spacing: -0.02em;
     line-height: 1.2em;
-    font-size: ${fontSizes.headLine};
+    font-size: ${fontSizes.engRegular};
   `,
   korBold: `
     font-family: NotoSansKR-Bold;
     line-height: 1;
-    font-size: ${fontSizes.headLine};
+    font-size: ${fontSizes.korBold};
   `,
   korRegular: `
     font-family: NotoSansKR;
     line-height: 1.2em;
-    font-size: ${fontSizes.headLine};
+    font-size: ${fontSizes.korRegular};
   `,
   korRegularBold: `
     font-family: NotoSansKR-Bold;
     letter-spacing: -0.25em;
     line-height: 1.2em;
-    font-size: ${fontSizes.headLine};
+    font-size: ${fontSizes.korRegularBold};
   `,
 };
 
