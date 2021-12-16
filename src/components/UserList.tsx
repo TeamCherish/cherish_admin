@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { getUserList } from "utils";
 
 import { User } from "utils/tempData";
-import plant1 from "../assets/images/plant1.png";
-import plant2 from "../assets/images/plant2.png";
-import plant3 from "../assets/images/plant3.png";
-import plant4 from "../assets/images/plant4.png";
-import plant5 from "../assets/images/plant5.png";
+import styled from "styled-components";
+import { theme } from "styled-tools";
+import { plant1, plant2, plant3, plant4, plant5 } from "assets";
 
 export default function UserList() {
   const [userList, setUserList] = useState<User[]>([]);
@@ -24,19 +22,59 @@ export default function UserList() {
     })();
   }, []);
 
-  console.log(userList);
-
   return (
-    <ul>
+    <StUserLists>
       {userList.map((userInfo) => (
-        <li>
-          <img src={plantImages[getRandomNum()]} />
-          <span>{userInfo.name}</span>
-          <span>{userInfo.email}</span>
-          <span>{userInfo.phoneNum}</span>
-          <span>{userInfo.contactCount}</span>
-        </li>
+        <StUserList>
+          <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
+          <StUserName>{userInfo.name}</StUserName>
+          <StUserEmail>{userInfo.email}</StUserEmail>
+          <StUserPhone>{userInfo.phoneNum}</StUserPhone>
+          <StUserContactCnt>{userInfo.contactCount}</StUserContactCnt>
+        </StUserList>
       ))}
-    </ul>
+    </StUserLists>
   );
 }
+
+const StUserLists = styled.ul`
+  height: calc(100% - 3.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  ${theme("fonts.korRegular")}
+`;
+
+const StUserList = styled.li`
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  & > img {
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-right: 0.7rem;
+  }
+  & > span {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+`;
+
+const StUserName = styled.span`
+  width: 6.4rem;
+  margin-right: 2.6rem;
+`;
+
+const StUserEmail = styled.span`
+  width: 15rem;
+  margin-right: 3rem;
+`;
+
+const StUserPhone = styled.span`
+  margin-right: 2.8rem;
+`;
+const StUserContactCnt = styled.span`
+  flex: 1;
+`;

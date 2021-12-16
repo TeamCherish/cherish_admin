@@ -58,6 +58,7 @@ const StUserListWrapper = styled.article`
 const StTopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2.2rem;
 `;
 
 const StH3 = styled.h3`
