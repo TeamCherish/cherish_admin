@@ -24,7 +24,7 @@ export default function UserListWrapper() {
   return (
     <Test>
       <StUserListWrapper>
-        <StTopWrapper>
+        <StHeaderWrapper>
           <StH3>사용자 목록</StH3>
           <StPageWrapper>
             {pageCnt === 1 ? (
@@ -35,7 +35,7 @@ export default function UserListWrapper() {
             <StPageCnt>{pageCnt}</StPageCnt>
             <ArrowRightActive onClick={goNextPage} />
           </StPageWrapper>
-        </StTopWrapper>
+        </StHeaderWrapper>
         <UserList />
       </StUserListWrapper>
     </Test>
@@ -55,7 +55,7 @@ const StUserListWrapper = styled.article`
   background-color: ${theme("colors.bgWhite")};
 `;
 
-const StTopWrapper = styled.div`
+const StHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 2.2rem;
