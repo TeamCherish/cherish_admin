@@ -16,5 +16,7 @@ const StWrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${theme("color.bgColor")};
+  width:100%;
+  height:138.6rem;
+  background-color: ${theme("colors.bgColor")};
 `;

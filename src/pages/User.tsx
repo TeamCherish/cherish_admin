@@ -1,19 +1,18 @@
 import styled from "styled-components";
+import UserListWrapper from "components/UserListWrapper";
 
 import { UserDetail } from "components";
 
 export default function User() {
   return (
     <StWrapper>
-      userPage
+      <UserListWrapper />
       <UserDetail />
     </StWrapper>
   );
 }
 
-const StWrapper = styled.section`
-  display: flex;
-  justify-content: space-between;
+const StWrapper = styled.main`
   width: 150rem;
   height: 107rem;
   gap: 4.8rem;

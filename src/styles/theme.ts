@@ -24,6 +24,7 @@ const fonts = {
   korBold: `
     font-family: NotoSansKR;
     line-height: 1;
+    font-weight: bold;
     font-size: ${fontSizes.korBold};
     font-weight: bold;
   `,
@@ -31,7 +32,7 @@ const fonts = {
     font-family: NotoSansKR;
     line-height: 1.2;
     font-size: ${fontSizes.korRegular};
-  `,
+    `,
   korRegularBold: `
     font-family: NotoSansKR;
     letter-spacing: -0.025em;
@@ -44,6 +45,7 @@ const fonts = {
     letter-spacing: -0.025em;
     line-height: 1.2;
     font-size: ${fontSizes.korTitle};
+    font-weight: bold;
   `,
 };
 
