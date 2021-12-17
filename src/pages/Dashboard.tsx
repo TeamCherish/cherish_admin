@@ -10,31 +10,31 @@ export default function Dashboard() {
     <StContent>
       <StSummaryWrapper>
         <DashboardSummary
-          SummaryIcon={joinUserIcon}
-          SummaryText="서비스 신규 이용자 수"
-          DataNumber="10"
-          DataVariation="+7"
+          summaryIcon={joinUserIcon}
+          summaryText="서비스 신규 이용자 수"
+          dataNumber="10"
+          dataVariation="+7"
         />
         <DashboardSummary
-          SummaryIcon={totalUserIcon}
-          SummaryText="서비스 누적 이용자 수"
-          DataNumber="7,777"
-          DataVariation="+7"
+          summaryIcon={totalUserIcon}
+          summaryText="서비스 누적 이용자 수"
+          dataNumber="7,777"
+          dataVariation="+7"
         />
         <DashboardSummary
-          SummaryIcon={totalPlantingIcon}
-          SummaryText="서비스 누적 수"
-          DataNumber="7,777"
-          DataVariation="+7"
+          summaryIcon={totalPlantingIcon}
+          summaryText="서비스 누적 수"
+          dataNumber="7,777"
+          dataVariation="+7"
         />
       </StSummaryWrapper>
       <StRowWrapper>
         <StChartWrapper>
           <ChartWrapper />
         </StChartWrapper>
-          <StUserWrapper>
-            <UserListWrapper />
-          </StUserWrapper>
+        <StUserWrapper>
+          <UserListWrapper />
+        </StUserWrapper>
       </StRowWrapper>
     </StContent>
   );

@@ -17,7 +17,13 @@ export interface Plant {
 
 export const PLANT_LIST: Plant[] = [
   { id: 1, name: "령이", period: 3, recentDate: "2021-08-31", accumulated: 8 },
-  { id: 2, name: "쭈삼쏘쭈삼쏘쭈삼쏘", period: 15, recentDate: "2021-12-31", accumulated: 2 },
+  {
+    id: 2,
+    name: "쭈삼쏘쭈삼쏘쭈삼쏘",
+    period: 15,
+    recentDate: "2021-12-31",
+    accumulated: 2,
+  },
   { id: 3, name: "쭈쌈", period: 10, recentDate: "2021-11-30", accumulated: 5 },
 ];
 
