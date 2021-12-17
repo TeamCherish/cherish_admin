@@ -40,6 +40,6 @@ const StWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 7rem;
-  padding: 18rem 4.7rem 10rem 4.7rem;
+  padding: 14rem 4.7rem 8rem 4.7rem;
   background-color: ${theme("colors.bgWhite")};
 `;

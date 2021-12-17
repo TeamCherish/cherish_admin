@@ -26,7 +26,8 @@ const StWrapper = styled.article`
 const StInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  ${theme("fonts.korTitleBold")}
+  ${theme("fonts.korTitle")}
+  font-weight: bold;
 
   span::after {
     content: "|";

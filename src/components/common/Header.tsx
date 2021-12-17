@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { theme } from "styled-tools";
 import { Link, useLocation } from "react-router-dom";
-import cherishLogo from "../../assets/images/cherish_logo.png"
-import logoutIcon from "../../assets/icons/logout.svg"
-
+import cherishLogo from "../../assets/images/cherish_logo.png";
+import logoutIcon from "../../assets/icons/logout.svg";
 
 export default function Header() {
-  const {pathname} = useLocation();
-  console.log(`pathname`, pathname)
+  const { pathname } = useLocation();
+  console.log(`pathname`, pathname);
   return (
     <StHeader>
       <StMenuWrapper>
@@ -16,10 +15,10 @@ export default function Header() {
           <span>Cherish Admin</span>
         </StLogo>
         <StMenuList>
-          <StMenu location={pathname==="/dashboard" ? true : false}>
+          <StMenu location={pathname === "/dashboard" ? true : false}>
             <Link to="/dashboard">Cherish Dashboard</Link>
           </StMenu>
-          <StMenu location={pathname==="/users" ? true : false}>
+          <StMenu location={pathname === "/users" ? true : false}>
             <Link to="/users">Users</Link>
           </StMenu>
         </StMenuList>
@@ -29,7 +28,6 @@ export default function Header() {
         <span>logout</span>
       </StLogoutWrapper>
     </StHeader>
-    
   );
 }
 
@@ -51,7 +49,7 @@ const StLogo = styled.div`
   align-items: center;
   margin-right: 5.5rem;
 
-  & > span{
+  & > span {
     font-family: ${theme("fonts.engBold")};
     color: ${theme("colors.mainColor")};
   }
@@ -70,22 +68,21 @@ const StMenuList = styled.div`
   width: 32.4rem;
 `;
 
-const StMenu = styled.div<{location: boolean}>`
+const StMenu = styled.div<{ location: boolean }>`
   font-family: ${theme("fonts.engBold")};
 
-
-  & > a{
-    color: ${(props) => props.location ? theme("colors.textBlack") : theme("colors.textGray")};
+  & > a {
+    color: ${(props) =>
+      props.location ? theme("colors.textBlack") : theme("colors.textGray")};
   }
 `;
-
 
 const StLogoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  & > span{
+  & > span {
     font-family: ${theme("fonts.engRegular")};
     color: ${theme("colors.textBlack")};
   }

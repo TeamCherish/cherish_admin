@@ -40,12 +40,11 @@ const fonts = {
     font-size: ${fontSizes.korRegular};
     font-weight: bold;
   `,
-  korTitleBold: `
+  korTitle: `
     font-family: NotoSansKR;
     letter-spacing: -0.025em;
     line-height: 1.2;
     font-size: ${fontSizes.korTitle};
-    font-weight: bold;
   `,
 };
 

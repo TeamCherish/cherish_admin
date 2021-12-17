@@ -15,20 +15,16 @@ export default function PlantList() {
     })();
   });
 
-  useEffect(() => {
-    console.log(`plantList`, plantList);
-  }, [plantList]);
-
   return (
     <StWrapper>
       <span>등록한 식물</span>
       <StTable>
-        <div>
+        <header>
           <StName>식물명</StName>
           <StPeriod>물주기</StPeriod>
           <StRecent>최근 물주기 날짜</StRecent>
           <StAccumulated>누적 물주기</StAccumulated>
-        </div>
+        </header>
         {plantList.map((plant) => (
           <div key={plant.id}>
             <StName>{plant.name}</StName>
@@ -49,10 +45,11 @@ const StWrapper = styled.article`
   padding: 4.3rem 4rem;
   background-color: ${theme("colors.pointWhite")};
   width: 85.7rem;
-  ${theme("fonts.korTitleBold")};
+  ${theme("fonts.korTitle")};
 
   & > span {
     margin-bottom: 4.3rem;
+    font-weight: bold;
   }
 `;
 
@@ -60,14 +57,20 @@ const StTable = styled.div`
   display: grid;
 
   width: 100%;
-  header,
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3.3rem;
+  }
+
   div {
     display: flex;
     justify-content: space-between;
-  }
 
-  div + div {
-    margin-top: 3.3rem;
+    & + div {
+      margin-top: 3.3rem;
+    }
   }
 
   span {

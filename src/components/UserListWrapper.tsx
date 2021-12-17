@@ -19,30 +19,23 @@ export default function UserListWrapper() {
   };
 
   return (
-    <Test>
-      <StUserListWrapper>
-        <StHeaderWrapper>
-          <StH3>사용자 목록</StH3>
-          <StPageWrapper>
-            {pageCnt === 1 ? (
-              <ArrowLeft />
-            ) : (
-              <ArrowLeftActive onClick={goPrevPage} />
-            )}
-            <StPageCnt>{pageCnt}</StPageCnt>
-            <ArrowRightActive onClick={goNextPage} />
-          </StPageWrapper>
-        </StHeaderWrapper>
-        <UserList />
-      </StUserListWrapper>
-    </Test>
+    <StUserListWrapper>
+      <StHeaderWrapper>
+        <StH3>사용자 목록</StH3>
+        <StPageWrapper>
+          {pageCnt === 1 ? (
+            <ArrowLeft />
+          ) : (
+            <ArrowLeftActive onClick={goPrevPage} />
+          )}
+          <StPageCnt>{pageCnt}</StPageCnt>
+          <ArrowRightActive onClick={goNextPage} />
+        </StPageWrapper>
+      </StHeaderWrapper>
+      <UserList />
+    </StUserListWrapper>
   );
 }
-
-const Test = styled.section`
-  width: 47.1rem;
-  height: 92.4rem;
-`;
 
 const StUserListWrapper = styled.article`
   width: 100%;
