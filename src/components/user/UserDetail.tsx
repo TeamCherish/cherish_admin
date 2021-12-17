@@ -11,10 +11,10 @@ const TEMP_USER_ID: number = 5;
 const INITIAL_PROPS: User = {
   id: 0,
   image: "",
-  name: "temp",
+  nickname: "temp",
   email: "temp@temp.com",
-  phoneNum: "0000",
-  contactCount: "00",
+  phone: "0000",
+  count: "00",
 };
 
 export default function UserDetail() {

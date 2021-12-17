@@ -9,7 +9,7 @@ export default function UserInfo(props: { userInfo: User }) {
     <StWrapper>
       <img src={userInfo.image} alt="userThumbNail-1" />
       <StInfoWrapper>
-        <span>{userInfo.name}</span>
+        <span>{userInfo.nickname}</span>
         {userInfo.email}
       </StInfoWrapper>
     </StWrapper>

@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "styled-tools";
 
+import { client } from "utils/api";
 import { User } from "utils/tempData";
-import { getUserList } from "utils";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
 
-export default function UserList() {
+export default function UserList(props: { pageCnt: number }) {
   const [userList, setUserList] = useState<User[]>([]);
   const plantImages = [plant1, plant2, plant3, plant4, plant5];
 
@@ -16,21 +16,27 @@ export default function UserList() {
   };
 
   useEffect(() => {
+    console.log(`pageCnt`, props.pageCnt);
     (async function () {
-      const data: User[] = await getUserList();
+      const data: User[] = await client.get("/user", {
+        params: {
+          offset: props.pageCnt,
+          count: 20,
+        },
+      });
       setUserList(data);
     })();
-  }, []);
+  }, [props.pageCnt]);
 
   return (
     <StUserLists>
       {userList.map((userInfo) => (
         <StUserList>
           <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
-          <StUserName>{userInfo.name}</StUserName>
+          <StUserName>{userInfo.nickname}</StUserName>
           <StUserEmail>{userInfo.email}</StUserEmail>
-          <StUserPhone>{userInfo.phoneNum}</StUserPhone>
-          <StUserContactCnt>{userInfo.contactCount}</StUserContactCnt>
+          <StUserPhone>{userInfo.phone}</StUserPhone>
+          <StUserContactCnt>{userInfo.count}</StUserContactCnt>
         </StUserList>
       ))}
     </StUserLists>
