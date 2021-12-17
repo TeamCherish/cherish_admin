@@ -1,8 +1,7 @@
 import DashboardSummary from "components/DashboardSummary";
 import styled from "styled-components";
-import joinUserIcon from "../assets/images/plant1.png";
-import totalUserIcon from "../assets/images/plant2.png";
-import totalPlantingIcon from "../assets/images/plant3.png";
+
+import { joinUserIcon, totalUserIcon, totalPlantingIcon } from "../assets";
 
 export default function Dashboard() {
   return (
