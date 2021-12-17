@@ -21,6 +21,11 @@ const StWrapper = styled.article`
   flex-direction: column;
   align-items: center;
   gap: 3.7rem;
+
+  & > img {
+    width: 20rem;
+    height: 20rem;
+  }
 `;
 
 const StInfoWrapper = styled.div`

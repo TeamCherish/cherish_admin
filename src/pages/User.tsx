@@ -15,7 +15,7 @@ export default function User() {
 const StWrapper = styled.main`
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
-  width: 150rem;
   gap: 4.8rem;
+  padding-bottom: 5rem;
+  width: 150rem;
 `;
