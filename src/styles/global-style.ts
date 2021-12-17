@@ -34,6 +34,15 @@ export const GlobalStyle = createGlobalStyle`
     background-color: transparent;                                                                                                                                                                        
   }
 
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    background-color: ${theme("colors.bgColor")};
+  }
 `;
 
 export default GlobalStyle;

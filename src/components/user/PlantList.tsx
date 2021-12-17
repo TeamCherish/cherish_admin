@@ -21,14 +21,14 @@ export default function PlantList() {
       <StTable>
         <header>
           <StName>식물명</StName>
-          <StPeriod>물주기</StPeriod>
+          <StName>물주기</StName>
           <StRecent>최근 물주기 날짜</StRecent>
           <StAccumulated>누적 물주기</StAccumulated>
         </header>
         {plantList.map((plant) => (
           <div key={plant.id}>
             <StName>{plant.name}</StName>
-            <StPeriod>{plant.period}</StPeriod>
+            <StName>{plant.period}</StName>
             <StRecent>{plant.recentDate}</StRecent>
             <StAccumulated>{plant.accumulated}</StAccumulated>
           </div>
@@ -42,9 +42,8 @@ const StWrapper = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4.3rem 4rem;
+  padding: 4rem 4rem;
   background-color: ${theme("colors.pointWhite")};
-  width: 85.7rem;
   ${theme("fonts.korTitle")};
 
   & > span {
@@ -54,14 +53,12 @@ const StWrapper = styled.article`
 `;
 
 const StTable = styled.div`
-  display: grid;
-
-  width: 100%;
+  ${theme("fonts.korRegular")}
 
   header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 3.3rem;
+    margin-bottom: 3rem;
   }
 
   div {
@@ -69,7 +66,7 @@ const StTable = styled.div`
     justify-content: space-between;
 
     & + div {
-      margin-top: 3.3rem;
+      margin-top: 3rem;
     }
   }
 
@@ -80,17 +77,13 @@ const StTable = styled.div`
 `;
 
 const StName = styled.span`
-  width: 9rem;
-`;
-
-const StPeriod = styled.span`
-  width: 9rem;
+  width: 17rem;
 `;
 
 const StRecent = styled.span`
-  width: 22rem;
+  width: 28rem;
 `;
 
 const StAccumulated = styled.span`
-  width: 15rem;
+  width: 20rem;
 `;
