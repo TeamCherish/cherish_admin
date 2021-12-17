@@ -6,7 +6,7 @@ import logoutIcon from "../../assets/icons/logout.svg";
 
 export default function Header() {
   const { pathname } = useLocation();
-  console.log(`pathname`, pathname);
+
   return (
     <StHeader>
       <StMenuWrapper>
@@ -83,7 +83,7 @@ const StLogoutWrapper = styled.div`
   align-items: center;
 
   & > span {
-    font-family: ${theme("fonts.engRegular")};
+    ${theme("fonts.engRegular")};
     color: ${theme("colors.textBlack")};
   }
 `;

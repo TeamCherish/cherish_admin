@@ -16,7 +16,7 @@ export default function UserList(props: { pageCnt: number }) {
   };
 
   useEffect(() => {
-    console.log(`pageCnt`, props.pageCnt);
+    // console.log(`pageCnt`, props.pageCnt);
     (async function () {
       const data: User[] = await client.get("/user", {
         params: {

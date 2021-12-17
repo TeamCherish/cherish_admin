@@ -9,15 +9,18 @@ interface DatePrickerProps {
 
 export default function DatePicker(props: DatePrickerProps) {
   const { month, year, onClickDate } = props;
+
   const today = new Date();
   const yearList: number[] = [];
   for (let year = 2021; year <= today.getFullYear(); year++) {
     yearList.push(year);
   }
+
   const monthList: number[] = [];
   for (let month = 1; month < 13; month++) {
     monthList.push(month);
   }
+
   return (
     <StDatePicker>
       <div>
