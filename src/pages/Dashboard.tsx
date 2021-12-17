@@ -31,7 +31,6 @@ export default function Dashboard() {
 }
 
 const StContent = styled.main`
-  margin-top: 5rem;
   width: 151.1rem;
 `;
 

@@ -62,14 +62,14 @@ const StLogoImage = styled.img`
   height: 4.6rem;
 `;
 
-const StMenuList = styled.div`
+const StMenuList = styled.ul`
   display: flex;
   justify-content: space-between;
   font-family: ${theme("fonts.engBold")};
   width: 32.4rem;
 `;
 
-const StMenu = styled.div<{ location: boolean }>`
+const StMenu = styled.li<{ location: boolean }>`
   font-family: ${theme("fonts.engBold")};
 
   & > a {
