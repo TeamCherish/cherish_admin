@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from "styled-tools";
 
-export default function DashboardSummary({
+export default function Summary({
   summaryIcon,
   summaryText,
   dataNumber,
