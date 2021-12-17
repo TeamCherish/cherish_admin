@@ -6,6 +6,11 @@ import { client } from "utils/api";
 import { User } from "utils/tempData";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
 
+interface Data {
+  totalPages: number;
+  totalUserCount: number;
+  users: User[];
+}
 export default function UserList(props: { pageCnt: number }) {
   const [userList, setUserList] = useState<User[]>([]);
   const plantImages = [plant1, plant2, plant3, plant4, plant5];
@@ -16,29 +21,34 @@ export default function UserList(props: { pageCnt: number }) {
   };
 
   useEffect(() => {
-    // console.log(`pageCnt`, props.pageCnt);
     (async function () {
-      const data: User[] = await client.get("/user", {
+      const { data } = await client.get<Data>("/user", {
         params: {
           offset: props.pageCnt,
           count: 20,
         },
       });
-      setUserList(data);
+      console.log(`data`, data);
+      setUserList(data.users);
     })();
   }, [props.pageCnt]);
 
+  useEffect(() => {
+    console.log(`userList`, userList);
+  }, [userList]);
+
   return (
     <StUserLists>
-      {userList.map((userInfo) => (
-        <StUserList>
-          <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
-          <StUserName>{userInfo.nickname}</StUserName>
-          <StUserEmail>{userInfo.email}</StUserEmail>
-          <StUserPhone>{userInfo.phone}</StUserPhone>
-          <StUserContactCnt>{userInfo.count}</StUserContactCnt>
-        </StUserList>
-      ))}
+      {userList &&
+        userList.map((userInfo) => (
+          <StUserList>
+            <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
+            <StUserName>{userInfo.nickname}</StUserName>
+            <StUserEmail>{userInfo.email}</StUserEmail>
+            <StUserPhone>{userInfo.phone}</StUserPhone>
+            <StUserContactCnt>{userInfo.count}</StUserContactCnt>
+          </StUserList>
+        ))}
     </StUserLists>
   );
 }
