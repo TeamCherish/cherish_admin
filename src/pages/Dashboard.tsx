@@ -21,7 +21,7 @@ export default function Dashboard() {
         />
         <DashboardSummary
           SummaryIcon={totalPlantingIcon}
-          SummaryText="서비스 누적  수"
+          SummaryText="서비스 누적 수"
           DataNumber="7,777"
           DataVariation="+7"
         />
@@ -30,12 +30,12 @@ export default function Dashboard() {
   );
 }
 
-const StContent = styled.div`
+const StContent = styled.main`
   margin-top: 5rem;
   width: 151.1rem;
 `;
 
-const StSummaryWrapper = styled.div`
+const StSummaryWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   width: 100%;

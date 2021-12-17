@@ -31,12 +31,13 @@ export default function Header() {
   );
 }
 
-const StHeader = styled.div`
+const StHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3.1rem;
   width: 100%;
+  margin-bottom: 4.8rem;
 `;
 
 const StMenuWrapper = styled.div`
