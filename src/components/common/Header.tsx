@@ -18,8 +18,8 @@ export default function Header() {
           <StMenu location={pathname === "/dashboard" ? true : false}>
             <Link to="/dashboard">Cherish Dashboard</Link>
           </StMenu>
-          <StMenu location={pathname === "/users" ? true : false}>
-            <Link to="/users">Users</Link>
+          <StMenu location={pathname === "/user" ? true : false}>
+            <Link to="/user">Users</Link>
           </StMenu>
         </StMenuList>
       </StMenuWrapper>
