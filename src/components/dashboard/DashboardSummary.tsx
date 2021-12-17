@@ -2,26 +2,26 @@ import styled from "styled-components";
 import { theme } from "styled-tools";
 
 export default function DashboardSummary({
-  SummaryIcon,
-  SummaryText,
-  DataNumber,
-  DataVariation,
+  summaryIcon,
+  summaryText,
+  dataNumber,
+  dataVariation,
 }) {
   return (
     <StSummaryBox>
-      <StSummaryIcon src={SummaryIcon}></StSummaryIcon>
+      <StSummaryIcon src={summaryIcon}></StSummaryIcon>
       <StSummaryText>
-        <h3>{SummaryText}</h3>
+        <h3>{summaryText}</h3>
         <StSummaryData>
-          <StDataNumber>{DataNumber}</StDataNumber>
-          <StDataVariation>{DataVariation}</StDataVariation>
+          <StDataNumber>{dataNumber}</StDataNumber>
+          <StDataVariation>{dataVariation}</StDataVariation>
         </StSummaryData>
       </StSummaryText>
     </StSummaryBox>
   );
 }
 
-const StSummaryBox = styled.div`
+const StSummaryBox = styled.article`
   display: flex;
   align-items: center;
   background-color: ${theme("colors.pointWhite")};
@@ -42,17 +42,17 @@ const StSummaryText = styled.div`
   }
 `;
 
-const StSummaryData = styled.div`
+const StSummaryData = styled.p`
   display: flex;
   ${theme("fonts.engBold")};
   margin-top: 1rem;
 `;
 
-const StDataNumber = styled.div`
+const StDataNumber = styled.p`
   color: ${theme("colors.textBlack")};
   margin-right: 1rem;
 `;
 
-const StDataVariation = styled.div`
+const StDataVariation = styled.p`
   color: ${theme("colors.textRed")};
 `;
