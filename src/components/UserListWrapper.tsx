@@ -32,7 +32,7 @@ export default function UserListWrapper() {
           <ArrowRightActive onClick={goNextPage} />
         </StPageWrapper>
       </StHeaderWrapper>
-      <UserList />
+      <UserList pageCnt={pageCnt} />
     </StUserListWrapper>
   );
 }
