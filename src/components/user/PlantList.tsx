@@ -26,12 +26,12 @@ export default function PlantList() {
           <StAccumulated>누적 물주기</StAccumulated>
         </header>
         {plantList.map((plant) => (
-          <div key={plant.id}>
+          <ul key={plant.id}>
             <StName>{plant.name}</StName>
-            <StName>{plant.period}</StName>
+            <StName>{plant.period}일</StName>
             <StRecent>{plant.recentDate}</StRecent>
-            <StAccumulated>{plant.accumulated}</StAccumulated>
-          </div>
+            <StAccumulated>{plant.accumulated}회</StAccumulated>
+          </ul>
         ))}
       </StTable>
     </StWrapper>
@@ -54,18 +54,20 @@ const StWrapper = styled.article`
 
 const StTable = styled.div`
   ${theme("fonts.korRegular")}
+  width: 80rem;
 
   header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 3rem;
+    width: 100%;
   }
 
-  div {
+  ul {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
 
-    & + div {
+    & + ul {
       margin-top: 3rem;
     }
   }
@@ -77,13 +79,19 @@ const StTable = styled.div`
 `;
 
 const StName = styled.span`
-  width: 17rem;
+  flex-grow: 1;
+  min-width: 15rem;
+  max-width: 15rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const StRecent = styled.span`
-  width: 28rem;
+  flex-grow: 3;
 `;
 
 const StAccumulated = styled.span`
-  width: 20rem;
+  flex-grow: 2;
+  min-width: 20rem;
 `;
