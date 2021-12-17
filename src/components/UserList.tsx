@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { getUserList } from "utils";
-
-import { User } from "utils/tempData";
 import styled from "styled-components";
 import { theme } from "styled-tools";
+
+import { User } from "utils/tempData";
+import { getUserList } from "utils";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
 
 export default function UserList() {

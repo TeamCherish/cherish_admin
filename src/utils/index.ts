@@ -9,7 +9,7 @@ export const getDateJoinList = async () => {
 };
 
 export const getUserInfo = async (id: number) => {
-  return USER_LIST.filter(user => user.id === id)[0];
+  return USER_LIST.filter((user) => user.id === id)[0];
 };
 
 export const getPlantList = async () => {

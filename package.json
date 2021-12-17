@@ -36,11 +36,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "yarn run lint-eslint && yarn run lint-prettier",
-    "lint-eslint": "eslint --ignore-path .gitignore src/**/*{js,jsx} --fix",
-    "lint-prettier": "prettier --write \"src/**/*.(js|jsx)\""
+    "lint-eslint": "eslint --ignore-path .gitignore src/**/*{ts,tsx} --fix",
+    "lint-prettier": "prettier --write \"src/**/*.(ts|tsx)\""
   },
   "lint-staged": {
-    "src/**/*.(js|jsx)": [
+    "src/**/*.(ts|tsx)": [
       "yarn lint"
     ]
   },

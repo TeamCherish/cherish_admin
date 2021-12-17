@@ -1,8 +1,12 @@
-import React from 'react'
 import styled from "styled-components";
-import {theme} from "styled-tools";
+import { theme } from "styled-tools";
 
-export default function DashboardSummary({ SummaryIcon, SummaryText, DataNumber, DataVariation }) {
+export default function DashboardSummary({
+  SummaryIcon,
+  SummaryText,
+  DataNumber,
+  DataVariation,
+}) {
   return (
     <StSummaryBox>
       <StSummaryIcon src={SummaryIcon}></StSummaryIcon>
@@ -14,7 +18,7 @@ export default function DashboardSummary({ SummaryIcon, SummaryText, DataNumber,
         </StSummaryData>
       </StSummaryText>
     </StSummaryBox>
-  )
+  );
 }
 
 const StSummaryBox = styled.div`
@@ -32,15 +36,15 @@ const StSummaryIcon = styled.img`
 `;
 
 const StSummaryText = styled.div`
-  & > h3{
-    font-family: ${theme("fonts.korBold")};
+  & > h3 {
+    ${theme("fonts.korBold")};
     color: ${theme("colors.textBlack")};
   }
 `;
 
 const StSummaryData = styled.div`
   display: flex;
-  font-family: ${theme("fonts.engBold")};
+  ${theme("fonts.engBold")};
   margin-top: 1rem;
 `;
 

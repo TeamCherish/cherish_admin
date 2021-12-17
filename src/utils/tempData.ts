@@ -1,25 +1,25 @@
 export interface User {
-    id: number;
-    image?: string;
-    name: string;
-    email: string;
-    phoneNum: string;
-    contactCount: string;
+  id: number;
+  image?: string;
+  name: string;
+  email: string;
+  phoneNum: string;
+  contactCount: string;
 }
 
 export interface Plant {
-    id: number;
-    name: string;
-    period: number;
-    recentDate: string;
-    accumulated: number;
+  id: number;
+  name: string;
+  period: number;
+  recentDate: string;
+  accumulated: number;
 }
 
 export const PLANT_LIST: Plant[] = [
-    {id: 1, name: "령이", period: 3, recentDate: "2021-08-31", accumulated: 8},
-    {id: 2, name: "쭈", period: 15, recentDate: "2021-12-31", accumulated: 2},
-    {id: 3, name: "쭈쌈", period: 10, recentDate: "2021-11-30", accumulated: 5},
-]
+  { id: 1, name: "령이", period: 3, recentDate: "2021-08-31", accumulated: 8 },
+  { id: 2, name: "쭈", period: 15, recentDate: "2021-12-31", accumulated: 2 },
+  { id: 3, name: "쭈쌈", period: 10, recentDate: "2021-11-30", accumulated: 5 },
+];
 
 interface DateJoin {
   date: string;
