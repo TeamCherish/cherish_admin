@@ -9,7 +9,7 @@ export default function SummaryWrapper() {
         summaryIcon={joinUserIcon}
         summaryText="서비스 신규 이용자 수"
         dataNumber="10"
-        dataVariation="+7"
+        dataVariation=""
       />
       <Summary
         summaryIcon={totalUserIcon}

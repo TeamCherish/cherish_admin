@@ -11,5 +11,5 @@ export { ReactComponent as ArrowLeftActive } from "./icons/arrowLeftActive.svg";
 export { ReactComponent as ArrowRight } from "./icons/arrowRight.svg";
 export { ReactComponent as ArrowRightActive } from "./icons/arrowRightActive.svg";
 export { default as logo } from "./images/app_logo.png";
-export { default as idIcon } from "./icons/id.svg";
-export { default as pwIcon } from "./icons/pw.svg";
+export { ReactComponent as IdIcon } from "./icons/id.svg";
+export { ReactComponent as PwIcon } from "./icons/pw.svg";
