@@ -7,16 +7,18 @@ import { IdIcon, PwIcon } from "assets";
 export default function LoginWrapper() {
   return (
     <form>
+      <label>아이디</label>
       <StInput>
         <IdIcon />
         <input id="id" placeholder="아이디를 입력해주세요" />
       </StInput>
+      <label>패스워드</label>
       <StInput>
         <PwIcon />
         <input id="pw" type="password" placeholder="비밀번호를 입력해주세요" />
       </StInput>
       <StLoginButton>
-        <Link to="/main">로그인</Link>
+        <Link to="/dashboard">로그인</Link>
       </StLoginButton>
     </form>
   )
@@ -26,10 +28,11 @@ const StInput = styled.div`
   display: flex;
   align-items: center; 
   border-radius: 0.4rem;
-  border: 1px solid ${theme("colors.chartLineGray")};
+  border: 0.1rem solid ${theme("colors.chartLineGray")};
   background-color: ${theme("colors.pointWhite")};
   width: 36.9rem;
   height: 4.5rem;
+  margin-top: 0.5rem;  
   margin-bottom: 2.7rem;
   
   & > svg {
