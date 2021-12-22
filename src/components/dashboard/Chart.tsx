@@ -146,6 +146,6 @@ const StBottomWrapper = styled.div`
 `;
 
 const StTitle = styled.h3`
-  font-family: ${theme("fonts.korBold")};
+  ${theme("fonts.korBold")};
   font-weight: 700;
 `;

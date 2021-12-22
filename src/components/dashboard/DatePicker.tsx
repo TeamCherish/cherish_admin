@@ -56,12 +56,12 @@ const StDatePicker = styled.div`
 `;
 
 const StUnselectedDate = styled.button`
-  font-family: ${theme("font.korRegular")};
+  ${theme("font.korRegular")};
   color: ${theme("colors.textGray")};
 `;
 
 const StSelectedDate = styled.button`
-  font-family: ${theme("font.korRegularBold")};
+  ${theme("font.korRegularBold")};
   font-weight: 700;
   cursor: default;
 `;
