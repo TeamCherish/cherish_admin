@@ -34,6 +34,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: transparent;                                                                                                                                                                        
   }
 
+  button {
+    color: inherit;
+  }
+
   #root {
     display: flex;
     flex-direction: column;
