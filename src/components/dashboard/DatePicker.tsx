@@ -1,14 +1,17 @@
-import styled from "styled-components";
-import { theme } from "styled-tools";
+import styled, { css } from "styled-components";
+import { ifProp, theme } from "styled-tools";
 
 interface DatePrickerProps {
-  month: number;
-  year: number;
-  onClickDate(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
+  selectedMonth: number;
+  selectedYear: number;
+  onClickDate(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    isSelected: boolean
+  ): void;
 }
 
 export default function DatePicker(props: DatePrickerProps) {
-  const { month, year, onClickDate } = props;
+  const { selectedMonth, selectedYear, onClickDate } = props;
 
   const today = new Date();
   const yearList: number[] = [];
@@ -24,26 +27,32 @@ export default function DatePicker(props: DatePrickerProps) {
   return (
     <StDatePicker>
       <div>
-        {yearList.map((tempYear) =>
-          tempYear === year ? (
-            <StSelectedDate>{tempYear}</StSelectedDate>
-          ) : (
-            <StUnselectedDate onClick={(e) => onClickDate(e)}>
-              {tempYear}
-            </StUnselectedDate>
-          )
-        )}
+        {yearList.map((year) => {
+          const isSelected = year === selectedYear;
+          return (
+            <StDate
+              isSelected={isSelected}
+              onClick={(e) => onClickDate(e, isSelected)}
+              key={year}
+            >
+              {year}
+            </StDate>
+          );
+        })}
       </div>
       <div>
-        {monthList.map((tempMonth) =>
-          tempMonth === month ? (
-            <StSelectedDate>{tempMonth}</StSelectedDate>
-          ) : (
-            <StUnselectedDate onClick={(e) => onClickDate(e)}>
-              {tempMonth}
-            </StUnselectedDate>
-          )
-        )}
+        {monthList.map((month) => {
+          const isSelected = month === selectedMonth;
+          return (
+            <StDate
+              isSelected={isSelected}
+              onClick={(e) => onClickDate(e, isSelected)}
+              key={month}
+            >
+              {month}
+            </StDate>
+          );
+        })}
       </div>
     </StDatePicker>
   );
@@ -55,13 +64,18 @@ const StDatePicker = styled.div`
   flex-direction: column;
 `;
 
-const StUnselectedDate = styled.button`
-  font-family: ${theme("font.korRegular")};
-  color: ${theme("colors.textGray")};
-`;
-
-const StSelectedDate = styled.button`
-  font-family: ${theme("font.korRegularBold")};
-  font-weight: 700;
-  cursor: default;
+const StDate = styled.button<{ isSelected: boolean }>`
+  ${ifProp(
+    { isSelected: true },
+    css`
+      ${theme("font.korRegularBold")};
+      font-weight: 700;
+      cursor: default;
+    `,
+    css`
+      ${theme("font.korRegular")};
+      color: ${theme("colors.textGray")};
+      cursor: pointer;
+    `
+  )}
 `;
