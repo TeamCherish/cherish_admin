@@ -26,9 +26,9 @@ export default function DatePicker(props: DatePrickerProps) {
       <div>
         {yearList.map((year) =>
           year === selectedYear ? (
-            <StSelectedDate>{year}</StSelectedDate>
+            <StSelectedDate key={year}>{year}</StSelectedDate>
           ) : (
-            <StUnselectedDate onClick={(e) => onClickDate(e)}>
+            <StUnselectedDate onClick={(e) => onClickDate(e)} key={year}>
               {year}
             </StUnselectedDate>
           )
@@ -37,9 +37,9 @@ export default function DatePicker(props: DatePrickerProps) {
       <div>
         {monthList.map((month) =>
           month === selectedMonth ? (
-            <StSelectedDate>{month}</StSelectedDate>
+            <StSelectedDate key={month}>{month}</StSelectedDate>
           ) : (
-            <StUnselectedDate onClick={(e) => onClickDate(e)}>
+            <StUnselectedDate onClick={(e) => onClickDate(e)} key={month}>
               {month}
             </StUnselectedDate>
           )
