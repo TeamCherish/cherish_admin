@@ -44,8 +44,11 @@ export default function Chart(props: ChartProps) {
     SignInfoByDate[]
   >([]);
 
-  const pickDate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (e.target instanceof HTMLButtonElement) {
+  const pickDate = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    isSelected: boolean
+  ) => {
+    if (!isSelected && e.target instanceof HTMLButtonElement) {
       if (e.target.innerText.length > 2) {
         setSelectedYear(Number(e.target.innerText));
       } else {
