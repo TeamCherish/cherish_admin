@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { theme } from "styled-tools";
 
 interface DatePrickerProps {
-  month: number;
-  year: number;
+  selectedMonth: number;
+  selectedYear: number;
   onClickDate(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
 }
 
 export default function DatePicker(props: DatePrickerProps) {
-  const { month, year, onClickDate } = props;
+  const { selectedMonth, selectedYear, onClickDate } = props;
 
   const today = new Date();
   const yearList: number[] = [];
@@ -24,23 +24,23 @@ export default function DatePicker(props: DatePrickerProps) {
   return (
     <StDatePicker>
       <div>
-        {yearList.map((tempYear) =>
-          tempYear === year ? (
-            <StSelectedDate>{tempYear}</StSelectedDate>
+        {yearList.map((year) =>
+          year === selectedYear ? (
+            <StSelectedDate>{year}</StSelectedDate>
           ) : (
             <StUnselectedDate onClick={(e) => onClickDate(e)}>
-              {tempYear}
+              {year}
             </StUnselectedDate>
           )
         )}
       </div>
       <div>
-        {monthList.map((tempMonth) =>
-          tempMonth === month ? (
-            <StSelectedDate>{tempMonth}</StSelectedDate>
+        {monthList.map((month) =>
+          month === selectedMonth ? (
+            <StSelectedDate>{month}</StSelectedDate>
           ) : (
             <StUnselectedDate onClick={(e) => onClickDate(e)}>
-              {tempMonth}
+              {month}
             </StUnselectedDate>
           )
         )}

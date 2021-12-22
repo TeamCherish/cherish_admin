@@ -30,7 +30,7 @@ interface ChartProps {
   title: string;
 }
 
-interface DateJoin {
+interface SignInfoByDate {
   date: string;
   count: number;
 }
@@ -38,16 +38,18 @@ interface DateJoin {
 export default function Chart(props: ChartProps) {
   const { title } = props;
   const today = new Date();
-  const [month, setMonth] = useState(today.getMonth() + 1);
-  const [year, setYear] = useState(today.getFullYear());
-  const [dateJoinList, setDateJoinList] = useState<DateJoin[]>([]);
+  const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(today.getFullYear());
+  const [signInfoByDateList, setSignInfoByDateList] = useState<
+    SignInfoByDate[]
+  >([]);
 
   const pickDate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.target instanceof HTMLButtonElement) {
       if (e.target.innerText.length > 2) {
-        setYear(Number(e.target.innerText));
+        setSelectedYear(Number(e.target.innerText));
       } else {
-        setMonth(Number(e.target.innerText));
+        setSelectedMonth(Number(e.target.innerText));
       }
     }
   };
@@ -55,7 +57,7 @@ export default function Chart(props: ChartProps) {
   useEffect(() => {
     (async function () {
       const data = await getDateJoinList();
-      setDateJoinList(data);
+      setSignInfoByDateList(data);
     })();
   }, []);
   const options = {
@@ -87,7 +89,7 @@ export default function Chart(props: ChartProps) {
       },
     },
   };
-  const labels = dateJoinList.map((dateJoin) =>
+  const labels = signInfoByDateList.map((dateJoin) =>
     Number(dateJoin.date.substring(6, 8))
   );
   const data = {
@@ -95,7 +97,7 @@ export default function Chart(props: ChartProps) {
     datasets: [
       {
         label: "",
-        data: dateJoinList.map((dateJoin) => dateJoin.count),
+        data: signInfoByDateList.map((dateJoin) => dateJoin.count),
         borderColor:
           title === "일별 가입 사용자 증가 추이" ? "#F1B0BC" : "#97CDBD",
         backgroundColor:
@@ -107,7 +109,11 @@ export default function Chart(props: ChartProps) {
     <StChart>
       <StTopWrapper>
         <StTitle>{title}</StTitle>
-        <DatePicker month={month} year={year} onClickDate={pickDate} />
+        <DatePicker
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+          onClickDate={pickDate}
+        />
       </StTopWrapper>
       <StBottomWrapper>
         <Line options={options} data={data} width="894px" height="320px" />
