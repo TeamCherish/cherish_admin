@@ -1,7 +1,6 @@
 import { theme } from "styled-tools";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+
 import { getDateJoinList } from "../../utils";
 import { DatePicker } from "../";
 

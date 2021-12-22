@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { Chart } from "../";
 
 export default function ChartWrapper() {
