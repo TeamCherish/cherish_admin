@@ -30,19 +30,25 @@ interface ChartProps {
   title: string;
 }
 
-interface JoinInfoByDate {
+interface InfoByDate {
   date: number;
   joinCount: number;
+  waterCount: number;
 }
 
 export default function Chart(props: ChartProps) {
   const { title } = props;
-  const JOIN_TITLE = "일별 가입 사용자 증가 추이";
+  const isJoin = title === "일별 가입 사용자 증가 추이";
+  const RESPONSE_TYPE = isJoin ? "user" : "contact";
+
   const today = new Date();
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
-  const [joinInfoByDateList, setJoinInfoByDateList] = useState<
-    JoinInfoByDate[]
+
+  type JoinInfoByDate = Omit<InfoByDate, "waterCount">;
+  type WaterInfoByDate = Omit<InfoByDate, "joinCount">;
+  const [infoByDateList, setInfoByDateList] = useState<
+    JoinInfoByDate[] | WaterInfoByDate[]
   >([]);
 
   const pickDate = (
@@ -60,33 +66,31 @@ export default function Chart(props: ChartProps) {
 
   useEffect(() => {
     (async function () {
-      const { data } = await client.get("/user/per-month-report", {
+      const { data } = await client.get(`/${RESPONSE_TYPE}/per-month-report`, {
         params: {
           year: selectedYear,
           month: selectedMonth,
         },
       });
-      setJoinInfoByDateList(data.data);
+      setInfoByDateList(data.data);
     })();
   }, []);
   useEffect(() => {
     (async function () {
       console.log("selectedMonth", selectedMonth);
       console.log("selectedYear", selectedYear);
-      const { data } = await client.get("/user/per-month-report", {
+      const { data } = await client.get(`/${RESPONSE_TYPE}/per-month-report`, {
         params: {
           year: selectedYear,
           month: selectedMonth,
         },
       });
-      setJoinInfoByDateList(data.data);
+      setInfoByDateList(data.data);
     })();
   }, [selectedYear, selectedMonth]);
 
-  useEffect(
-    () => console.log("join", joinInfoByDateList),
-    [joinInfoByDateList]
-  );
+  //test push 할 때 지울 것
+  useEffect(() => console.log("info", infoByDateList), [infoByDateList]);
 
   const options = {
     responsive: false,
@@ -117,15 +121,21 @@ export default function Chart(props: ChartProps) {
       },
     },
   };
-  const labels = joinInfoByDateList.map((joinInfo) => joinInfo.date);
+  const labels = infoByDateList.map((info) => info.date);
   const data = {
     labels,
     datasets: [
       {
         label: "",
-        data: joinInfoByDateList.map((joinInfo) => joinInfo.joinCount),
-        borderColor: title === JOIN_TITLE ? "#F1B0BC" : "#97CDBD",
-        backgroundColor: title === JOIN_TITLE ? "#F1B0BC" : "#97CDBD",
+        data: infoByDateList.map((info) => {
+          if ("joinCount" in info) {
+            return info.joinCount;
+          } else {
+            return info.waterCount;
+          }
+        }),
+        borderColor: isJoin ? "#F1B0BC" : "#97CDBD",
+        backgroundColor: isJoin ? "#F1B0BC" : "#97CDBD",
       },
     ],
   };
