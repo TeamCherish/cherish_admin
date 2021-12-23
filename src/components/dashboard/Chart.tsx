@@ -13,8 +13,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-import { getDateJoinList } from "../../utils";
 import { DatePicker } from "../";
+import { client } from "utils/api";
 
 ChartJS.register(
   CategoryScale,
@@ -30,18 +30,19 @@ interface ChartProps {
   title: string;
 }
 
-interface SignInfoByDate {
-  date: string;
-  count: number;
+interface JoinInfoByDate {
+  date: number;
+  joinCount: number;
 }
 
 export default function Chart(props: ChartProps) {
   const { title } = props;
+  const JOIN_TITLE = "일별 가입 사용자 증가 추이";
   const today = new Date();
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
-  const [signInfoByDateList, setSignInfoByDateList] = useState<
-    SignInfoByDate[]
+  const [joinInfoByDateList, setJoinInfoByDateList] = useState<
+    JoinInfoByDate[]
   >([]);
 
   const pickDate = (
@@ -59,10 +60,34 @@ export default function Chart(props: ChartProps) {
 
   useEffect(() => {
     (async function () {
-      const data = await getDateJoinList();
-      setSignInfoByDateList(data);
+      const { data } = await client.get("/user/per-month-report", {
+        params: {
+          year: selectedYear,
+          month: selectedMonth,
+        },
+      });
+      setJoinInfoByDateList(data.data);
     })();
   }, []);
+  useEffect(() => {
+    (async function () {
+      console.log("selectedMonth", selectedMonth);
+      console.log("selectedYear", selectedYear);
+      const { data } = await client.get("/user/per-month-report", {
+        params: {
+          year: selectedYear,
+          month: selectedMonth,
+        },
+      });
+      setJoinInfoByDateList(data.data);
+    })();
+  }, [selectedYear, selectedMonth]);
+
+  useEffect(
+    () => console.log("join", joinInfoByDateList),
+    [joinInfoByDateList]
+  );
+
   const options = {
     responsive: false,
     interaction: {
@@ -92,19 +117,15 @@ export default function Chart(props: ChartProps) {
       },
     },
   };
-  const labels = signInfoByDateList.map((dateJoin) =>
-    Number(dateJoin.date.substring(6, 8))
-  );
+  const labels = joinInfoByDateList.map((joinInfo) => joinInfo.date);
   const data = {
     labels,
     datasets: [
       {
         label: "",
-        data: signInfoByDateList.map((dateJoin) => dateJoin.count),
-        borderColor:
-          title === "일별 가입 사용자 증가 추이" ? "#F1B0BC" : "#97CDBD",
-        backgroundColor:
-          title === "일별 가입 사용자 증가 추이" ? "#F1B0BC" : "#97CDBD",
+        data: joinInfoByDateList.map((joinInfo) => joinInfo.joinCount),
+        borderColor: title === JOIN_TITLE ? "#F1B0BC" : "#97CDBD",
+        backgroundColor: title === JOIN_TITLE ? "#F1B0BC" : "#97CDBD",
       },
     ],
   };
