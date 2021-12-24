@@ -4,7 +4,7 @@ import { theme } from "styled-tools";
 import styled from "styled-components";
 import UserList from "./UserList";
 
-import { ArrowLeft, ArrowLeftActive, ArrowRightActive } from "../assets";
+import { ArrowLeft, ArrowLeftActive, ArrowRightActive } from "../../assets";
 
 export default function UserListWrapper() {
   const [pageCnt, setPageCnt] = useState(1);

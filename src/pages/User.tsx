@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import UserListWrapper from "components/UserListWrapper";
+import UserListWrapper from "components/common/UserListWrapper";
 
 import { UserDetail } from "components";
 

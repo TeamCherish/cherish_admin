@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { theme } from "styled-tools";
-import SummaryWrapper from "../components/dashboard/SummaryWrapper";
+import SummaryWrapper from "components/dashboard/SummaryWrapper";
 import ChartWrapper from "components/dashboard/ChartWrapper";
-import UserListWrapper from "components/UserListWrapper";
+import UserListWrapper from "components/common/UserListWrapper";
 
 export default function Dashboard() {
   return (

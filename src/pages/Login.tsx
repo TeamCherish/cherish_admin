@@ -4,9 +4,7 @@ import styled from "styled-components";
 import { theme } from "styled-tools";
 import { client } from "utils/api";
 import { logo } from "assets";
-import LoginWrapper from "components/LoginWrapper";
-
-
+import LoginWrapper from "components/login/LoginForm";
 
 export default function Login() {
   const [temp, setTemp] = useState();
@@ -58,4 +56,3 @@ const StHeader = styled.header`
     ${theme("fonts.engBold")};
   }
 `;
-
