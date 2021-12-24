@@ -4,7 +4,7 @@ import { theme } from "styled-tools";
 import styled from "styled-components";
 import UserList from "./UserList";
 
-import { ArrowLeft, ArrowLeftActive, ArrowRightActive } from "../../assets";
+import { ArrowLeft, ArrowLeftActive, ArrowRight } from "../../assets";
 
 export default function UserListWrapper() {
   const [pageCnt, setPageCnt] = useState(1);
@@ -24,12 +24,12 @@ export default function UserListWrapper() {
         <StH3>사용자 목록</StH3>
         <StPageWrapper>
           {pageCnt === 1 ? (
-            <ArrowLeft />
+            <StArrowLeft />
           ) : (
             <ArrowLeftActive onClick={goPrevPage} />
           )}
           <StPageCnt>{pageCnt}</StPageCnt>
-          <ArrowRightActive onClick={goNextPage} />
+          <StArrowRight onClick={goNextPage} />
         </StPageWrapper>
       </StHeaderWrapper>
       <UserList pageCnt={pageCnt} />
@@ -48,7 +48,20 @@ const StUserListWrapper = styled.article`
 const StHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  /* align-items: center; */
   margin-bottom: 2.2rem;
+`;
+
+const StArrowLeft = styled(ArrowLeft)`
+  height: 100%;
+  text-anchor: middle;
+  alignment-baseline: middle;
+`;
+
+const StArrowRight = styled(ArrowRight)`
+  height: 100%;
+  text-anchor: middle;
+  alignment-baseline: middle;
 `;
 
 const StH3 = styled.h3`
@@ -65,6 +78,7 @@ const StPageWrapper = styled.div`
 `;
 
 const StPageCnt = styled.span`
-  width: 1rem;
+  width: 100%;
+  text-align: center;
   font-size: 1.8rem;
 `;

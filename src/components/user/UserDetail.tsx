@@ -25,7 +25,7 @@ export default function UserDetail() {
       const userData: User = await getUserInfo(TEMP_USER_ID);
       setUserInfo({ ...userData, image: plant1 });
     })();
-  });
+  }, []);
 
   return (
     <StWrapper>
