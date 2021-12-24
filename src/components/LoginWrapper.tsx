@@ -16,22 +16,22 @@ export default function LoginWrapper() {
         <input id="pw" type="password" placeholder="비밀번호를 입력해주세요" />
       </StInput>
       <StLoginButton>
-        <Link to="/main">로그인</Link>
+        <Link to="/main/dashboard">로그인</Link>
       </StLoginButton>
     </form>
-  )
+  );
 }
 
 const StInput = styled.div`
   display: flex;
-  align-items: center; 
+  align-items: center;
   border-radius: 0.4rem;
   border: 1px solid ${theme("colors.chartLineGray")};
   background-color: ${theme("colors.pointWhite")};
   width: 36.9rem;
   height: 4.5rem;
   margin-bottom: 2.7rem;
-  
+
   & > svg {
     width: 1.9rem;
     margin: 1.2rem 0 1.2rem 2rem;
@@ -58,8 +58,3 @@ const StLoginButton = styled.p`
     color: ${theme("colors.pointWhite")};
   }
 `;
-
-
-
-
-      
