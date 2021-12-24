@@ -57,6 +57,12 @@ const StUserLists = styled.ul`
   flex-direction: column;
   justify-content: space-between;
   ${theme("fonts.korRegular")}
+
+  & > * {
+    &:hover {
+      ${theme("fonts.korRegularBold")}
+    }
+  }
 `;
 
 const StUserList = styled.li`
