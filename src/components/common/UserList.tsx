@@ -28,14 +28,9 @@ export default function UserList(props: { pageCnt: number }) {
           count: 20,
         },
       });
-      console.log(`data`, data);
       setUserList(data.users);
     })();
   }, [props.pageCnt]);
-
-  useEffect(() => {
-    console.log(`userList`, userList);
-  }, [userList]);
 
   return (
     <StUserLists>

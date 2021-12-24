@@ -4,18 +4,30 @@ import { theme } from "styled-tools";
 import styled from "styled-components";
 import UserList from "./UserList";
 
-import { ArrowLeft, ArrowLeftActive, ArrowRight } from "../../assets";
+import { ArrowLeft, ArrowRight } from "../../assets";
 
 export default function UserListWrapper() {
+  const MAX_PAGE = 5;
   const [pageCnt, setPageCnt] = useState(1);
+  const [isLeftActive, setIsLeftActive] = useState(true);
+  const [isRightActive, setIsRightActive] = useState(true);
 
   const goPrevPage = () => {
-    if (pageCnt <= 1) return;
-    setPageCnt((cnt) => cnt - 1);
+    if (!isLeftActive) return;
+
+    const newCnt = pageCnt - 1;
+    setPageCnt(newCnt);
+    if (newCnt <= 1) setIsLeftActive(false);
+    if (!isRightActive && newCnt < MAX_PAGE) setIsRightActive(true);
   };
 
   const goNextPage = () => {
-    setPageCnt((cnt) => cnt + 1);
+    if (!isRightActive) return;
+
+    const newCnt = pageCnt + 1;
+    setPageCnt(newCnt);
+    if (!isLeftActive && newCnt > 1) setIsLeftActive(true);
+    if (newCnt >= MAX_PAGE) setIsRightActive(false);
   };
 
   return (
@@ -23,13 +35,9 @@ export default function UserListWrapper() {
       <StHeaderWrapper>
         <StH3>사용자 목록</StH3>
         <StPageWrapper>
-          {pageCnt === 1 ? (
-            <StArrowLeft />
-          ) : (
-            <ArrowLeftActive onClick={goPrevPage} />
-          )}
+          <StArrowLeft onClick={goPrevPage} isActive={isLeftActive} />
           <StPageCnt>{pageCnt}</StPageCnt>
-          <StArrowRight onClick={goNextPage} />
+          <StArrowRight onClick={goNextPage} isActive={isRightActive} />
         </StPageWrapper>
       </StHeaderWrapper>
       <UserList pageCnt={pageCnt} />
@@ -52,16 +60,20 @@ const StHeaderWrapper = styled.div`
   margin-bottom: 2.2rem;
 `;
 
-const StArrowLeft = styled(ArrowLeft)`
+const StArrowLeft = styled(ArrowLeft)<{ isActive: boolean }>`
   height: 100%;
   text-anchor: middle;
   alignment-baseline: middle;
+  fill: ${(props) =>
+    props.isActive ? theme("colors.textBlack") : theme("colors.textGray")};
 `;
 
-const StArrowRight = styled(ArrowRight)`
+const StArrowRight = styled(ArrowRight)<{ isActive: boolean }>`
   height: 100%;
   text-anchor: middle;
   alignment-baseline: middle;
+  fill: ${(props) =>
+    props.isActive ? theme("colors.textBlack") : theme("colors.textGray")};
 `;
 
 const StH3 = styled.h3`
