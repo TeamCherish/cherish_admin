@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "styled-tools";
 
 import { Chart } from "../";
 
@@ -13,6 +14,7 @@ export default function ChartWrapper() {
 
 const StChartWrapper = styled.section`
   width: 99.2rem;
+  background-color: ${theme("colors.bgColor")};
   & > *:first-child {
     margin-bottom: 48px;
   }
