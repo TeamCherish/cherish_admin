@@ -13,8 +13,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-import { getDateJoinList } from "../../utils";
 import { DatePicker } from "../";
+import { client } from "utils/api";
 
 ChartJS.register(
   CategoryScale,
@@ -30,18 +30,25 @@ interface ChartProps {
   title: string;
 }
 
-interface SignInfoByDate {
-  date: string;
-  count: number;
+interface InfoByDate {
+  date: number;
+  joinCount: number;
+  waterCount: number;
 }
 
 export default function Chart(props: ChartProps) {
   const { title } = props;
+  const isJoin = title === "일별 가입 사용자 증가 추이";
+  const RESPONSE_TYPE = isJoin ? "user" : "contact";
+
   const today = new Date();
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
-  const [signInfoByDateList, setSignInfoByDateList] = useState<
-    SignInfoByDate[]
+
+  type JoinInfoByDate = Omit<InfoByDate, "waterCount">;
+  type WaterInfoByDate = Omit<InfoByDate, "joinCount">;
+  const [infoByDateList, setInfoByDateList] = useState<
+    JoinInfoByDate[] | WaterInfoByDate[]
   >([]);
 
   const pickDate = (
@@ -59,10 +66,32 @@ export default function Chart(props: ChartProps) {
 
   useEffect(() => {
     (async function () {
-      const data = await getDateJoinList();
-      setSignInfoByDateList(data);
+      const { data } = await client.get(`/${RESPONSE_TYPE}/per-month-report`, {
+        params: {
+          year: selectedYear,
+          month: selectedMonth,
+        },
+      });
+      setInfoByDateList(data.data);
     })();
   }, []);
+  useEffect(() => {
+    (async function () {
+      console.log("selectedMonth", selectedMonth);
+      console.log("selectedYear", selectedYear);
+      const { data } = await client.get(`/${RESPONSE_TYPE}/per-month-report`, {
+        params: {
+          year: selectedYear,
+          month: selectedMonth,
+        },
+      });
+      setInfoByDateList(data.data);
+    })();
+  }, [selectedYear, selectedMonth]);
+
+  //test push 할 때 지울 것
+  useEffect(() => console.log("info", infoByDateList), [infoByDateList]);
+
   const options = {
     responsive: false,
     interaction: {
@@ -92,19 +121,21 @@ export default function Chart(props: ChartProps) {
       },
     },
   };
-  const labels = signInfoByDateList.map((dateJoin) =>
-    Number(dateJoin.date.substring(6, 8))
-  );
+  const labels = infoByDateList.map((info) => info.date);
   const data = {
     labels,
     datasets: [
       {
         label: "",
-        data: signInfoByDateList.map((dateJoin) => dateJoin.count),
-        borderColor:
-          title === "일별 가입 사용자 증가 추이" ? "#F1B0BC" : "#97CDBD",
-        backgroundColor:
-          title === "일별 가입 사용자 증가 추이" ? "#F1B0BC" : "#97CDBD",
+        data: infoByDateList.map((info) => {
+          if ("joinCount" in info) {
+            return info.joinCount;
+          } else {
+            return info.waterCount;
+          }
+        }),
+        borderColor: isJoin ? "#F1B0BC" : "#97CDBD",
+        backgroundColor: isJoin ? "#F1B0BC" : "#97CDBD",
       },
     ],
   };
