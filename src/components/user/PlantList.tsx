@@ -13,7 +13,7 @@ export default function PlantList() {
       const plantData: Plant[] = await getPlantList();
       setPlantList(plantData);
     })();
-  });
+  }, []);
 
   return (
     <StWrapper>

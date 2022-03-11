@@ -5,6 +5,7 @@ import { theme } from "styled-tools";
 import { client } from "utils/api";
 import { User } from "utils/tempData";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
+import { Link } from "react-router-dom";
 
 interface Data {
   totalPages: number;
@@ -28,26 +29,23 @@ export default function UserList(props: { pageCnt: number }) {
           count: 20,
         },
       });
-      console.log(`data`, data);
       setUserList(data.users);
     })();
   }, [props.pageCnt]);
-
-  useEffect(() => {
-    console.log(`userList`, userList);
-  }, [userList]);
 
   return (
     <StUserLists>
       {userList &&
         userList.map((userInfo) => (
-          <StUserList>
-            <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
-            <StUserName>{userInfo.nickname}</StUserName>
-            <StUserEmail>{userInfo.email}</StUserEmail>
-            <StUserPhone>{userInfo.phone}</StUserPhone>
-            <StUserContactCnt>{userInfo.count}</StUserContactCnt>
-          </StUserList>
+          <Link to="/main/user">
+            <StUserList>
+              <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
+              <StUserName>{userInfo.nickname}</StUserName>
+              <StUserEmail>{userInfo.email}</StUserEmail>
+              <StUserPhone>{userInfo.phone}</StUserPhone>
+              <StUserContactCnt>{userInfo.count}</StUserContactCnt>
+            </StUserList>
+          </Link>
         ))}
     </StUserLists>
   );
@@ -59,6 +57,12 @@ const StUserLists = styled.ul`
   flex-direction: column;
   justify-content: space-between;
   ${theme("fonts.korRegular")}
+
+  & > * {
+    &:hover {
+      ${theme("fonts.korRegularBold")}
+    }
+  }
 `;
 
 const StUserList = styled.li`
