@@ -1,5 +1,5 @@
 import { theme } from "styled-tools";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   Chart as ChartJS,
@@ -14,7 +14,7 @@ import {
 import { Line } from "react-chartjs-2";
 
 import { DatePicker } from "../";
-import { client } from "utils/api";
+import { JoinInfo, WaterInfo } from "./ChartWrapper";
 
 ChartJS.register(
   CategoryScale,
@@ -28,28 +28,16 @@ ChartJS.register(
 
 interface ChartProps {
   title: string;
-}
-
-interface InfoByDate {
-  date: number;
-  joinCount: number;
-  waterCount: number;
+  infoList: JoinInfo[] | WaterInfo[];
 }
 
 export default function Chart(props: ChartProps) {
-  const { title } = props;
-  const isJoin = title === "일별 가입 사용자 증가 추이";
-  const RESPONSE_TYPE = isJoin ? "user" : "contact";
+  const { title, infoList } = props;
 
+  const isJoin = title === "일별 가입 사용자 증가 추이";
   const today = new Date();
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
-
-  type JoinInfoByDate = Omit<InfoByDate, "waterCount">;
-  type WaterInfoByDate = Omit<InfoByDate, "joinCount">;
-  const [infoByDateList, setInfoByDateList] = useState<
-    JoinInfoByDate[] | WaterInfoByDate[]
-  >([]);
 
   const pickDate = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -63,34 +51,6 @@ export default function Chart(props: ChartProps) {
       }
     }
   };
-
-  useEffect(() => {
-    (async function () {
-      const { data } = await client.get(`/${RESPONSE_TYPE}/per-month-report`, {
-        params: {
-          year: selectedYear,
-          month: selectedMonth,
-        },
-      });
-      setInfoByDateList(data.data);
-    })();
-  }, []);
-  useEffect(() => {
-    (async function () {
-      console.log("selectedMonth", selectedMonth);
-      console.log("selectedYear", selectedYear);
-      const { data } = await client.get(`/${RESPONSE_TYPE}/per-month-report`, {
-        params: {
-          year: selectedYear,
-          month: selectedMonth,
-        },
-      });
-      setInfoByDateList(data.data);
-    })();
-  }, [selectedYear, selectedMonth]);
-
-  //test push 할 때 지울 것
-  useEffect(() => console.log("info", infoByDateList), [infoByDateList]);
 
   const options = {
     responsive: false,
@@ -121,13 +81,13 @@ export default function Chart(props: ChartProps) {
       },
     },
   };
-  const labels = infoByDateList.map((info) => info.date);
+  const labels = infoList.map((info) => info.date);
   const data = {
     labels,
     datasets: [
       {
         label: "",
-        data: infoByDateList.map((info) => {
+        data: infoList.map((info) => {
           if ("joinCount" in info) {
             return info.joinCount;
           } else {
