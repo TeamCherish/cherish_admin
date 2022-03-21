@@ -15,11 +15,11 @@ export default function Header() {
           <span>Cherish Admin</span>
         </StLogo>
         <StMenuList>
-          <StMenu location={pathname === "/dashboard" ? true : false}>
-            <Link to="/dashboard">Cherish Dashboard</Link>
+          <StMenu location={pathname === "/main/dashboard" ? true : false}>
+            <Link to="/main/dashboard">Cherish Dashboard</Link>
           </StMenu>
-          <StMenu location={pathname === "/user" ? true : false}>
-            <Link to="/user">Users</Link>
+          <StMenu location={pathname === "/main/user" ? true : false}>
+            <Link to="/main/user">Users</Link>
           </StMenu>
         </StMenuList>
       </StMenuWrapper>
