@@ -13,22 +13,38 @@ interface DatePrickerProps {
 export default function DatePicker(props: DatePrickerProps) {
   const { selectedMonth, selectedYear, onClickDate } = props;
 
+  const START_YEAR = 2021;
+  const START_MONTH = 7;
   const today = new Date();
-  const yearList: number[] = [];
-  for (let year = 2021; year <= today.getFullYear(); year++) {
-    yearList.push(year);
-  }
 
-  const monthList: number[] = [];
-  for (let month = 1; month < 13; month++) {
-    monthList.push(month);
-  }
+  // useCallback 이용
+  const getDateList = () => {
+    const dateList: Array<{ [x: number]: { [x: number]: number[] }[] }> = [];
+    for (let year = START_YEAR; year <= today.getFullYear(); year) {
+      let month: number;
+      if (year === START_YEAR) month = START_MONTH;
+      else month = 1;
+      const monthList: Array<{ [x: number]: number[] }> = [];
+      for (; month <= 12; month++) {
+        const dayList: Array<number> = [];
+        const lastDay = new Date(year, month, 0).getDate();
+        for (let day = 1; day <= lastDay; day++) {
+          dayList.push(day);
+        }
+        monthList.push({ [month]: dayList });
+      }
+      dateList.push({ [year]: monthList });
+    }
+    return dateList;
+  };
+
+  const dateList = getDateList();
 
   return (
     <StDatePicker>
       <div>
-        {yearList.map((year) => {
-          const isSelected = year === selectedYear;
+        {Object.keys(dateList).map((year) => {
+          const isSelected = Number(year) === selectedYear;
           return (
             <StDate
               isSelected={isSelected}
@@ -41,8 +57,8 @@ export default function DatePicker(props: DatePrickerProps) {
         })}
       </div>
       <div>
-        {monthList.map((month) => {
-          const isSelected = month === selectedMonth;
+        {Object.keys(dateList[selectedYear]).map((month) => {
+          const isSelected = Number(month) === selectedMonth;
           return (
             <StDate
               isSelected={isSelected}
