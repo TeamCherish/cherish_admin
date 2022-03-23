@@ -44,8 +44,12 @@ export default function ChartWrapper() {
       selectedDate.month,
       0
     ).getDate();
-
-    setInfoList(data.data.slice(0, lastDay));
+    const today = new Date();
+    setInfoList(
+      selectedDate.month === today.getMonth() + 1
+        ? data.data.slice(0, today.getDate())
+        : data.data.slice(0, lastDay)
+    );
   };
 
   useEffect(() => {
