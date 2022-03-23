@@ -34,6 +34,10 @@ export default function ChartWrapper() {
         }
       );
       setJoinInfoList(joinResponse.data);
+    })();
+  }, [joinSelectedDate]);
+  useEffect(() => {
+    (async function () {
       const { data: waterResponse } = await client.get(
         `/contact/per-month-report`,
         {
@@ -45,7 +49,11 @@ export default function ChartWrapper() {
       );
       setWaterInfoList(waterResponse.data);
     })();
-  }, [joinSelectedDate, waterSelectedDate]);
+  }, [waterSelectedDate]);
+
+  useEffect(() => {
+    console.log(joinInfoList);
+  }, [joinInfoList]);
 
   return (
     <StChartWrapper>
