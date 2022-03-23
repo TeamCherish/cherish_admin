@@ -51,10 +51,6 @@ export default function ChartWrapper() {
     })();
   }, [waterSelectedDate]);
 
-  useEffect(() => {
-    console.log(joinInfoList);
-  }, [joinInfoList]);
-
   return (
     <StChartWrapper>
       <Chart
