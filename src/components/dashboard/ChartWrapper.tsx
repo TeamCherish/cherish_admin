@@ -4,24 +4,23 @@ import { theme } from "styled-tools";
 import { Chart } from "../";
 
 import { client } from "utils/api";
+import { useRecoilValue } from "recoil";
+import { joinSelectedDateAtom, waterSelectedDateAtom } from "states";
 
 export interface JoinInfo {
   date: number;
   joinCount: number;
 }
-
 export interface WaterInfo {
   date: number;
   waterCount: number;
 }
 
 export default function ChartWrapper() {
-  const today = new Date();
-
   const [joinInfoList, setJoinInfoList] = useState<JoinInfo[]>([]);
   const [waterInfoList, setWaterInfoList] = useState<WaterInfo[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
-  const [selectedYear, setSelectedYear] = useState(today.getFullYear());
+  const joinSelectedDate = useRecoilValue(joinSelectedDateAtom);
+  const waterSelectedDate = useRecoilValue(waterSelectedDateAtom);
 
   useEffect(() => {
     (async function () {
@@ -29,8 +28,8 @@ export default function ChartWrapper() {
         `/user/per-month-report`,
         {
           params: {
-            year: selectedYear,
-            month: selectedMonth,
+            year: joinSelectedDate.year,
+            month: joinSelectedDate.month,
           },
         }
       );
@@ -39,19 +38,27 @@ export default function ChartWrapper() {
         `/contact/per-month-report`,
         {
           params: {
-            year: selectedYear,
-            month: selectedMonth,
+            year: waterSelectedDate.year,
+            month: waterSelectedDate.month,
           },
         }
       );
       setWaterInfoList(waterResponse.data);
     })();
-  }, [selectedMonth, selectedYear]);
+  }, [joinSelectedDate, waterSelectedDate]);
 
   return (
     <StChartWrapper>
-      <Chart title="일별 가입 사용자 증가 추이" infoList={joinInfoList} />
-      <Chart title="누적 물주기 증가 추이" infoList={waterInfoList} />
+      <Chart
+        title="일별 가입 사용자 증가 추이"
+        infoList={joinInfoList}
+        selectedDateAtom={joinSelectedDateAtom}
+      />
+      <Chart
+        title="누적 물주기 증가 추이"
+        infoList={waterInfoList}
+        selectedDateAtom={waterSelectedDateAtom}
+      />
     </StChartWrapper>
   );
 }

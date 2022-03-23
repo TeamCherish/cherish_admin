@@ -1,21 +1,37 @@
+import { RecoilState, useRecoilState } from "recoil";
+import { SelectedDate } from "states";
 import styled, { css } from "styled-components";
 import { ifProp, theme } from "styled-tools";
 
 interface DatePrickerProps {
-  selectedMonth: number;
-  selectedYear: number;
-  onClickDate(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    isSelected: boolean
-  ): void;
+  selectedDateAtom: RecoilState<SelectedDate>;
 }
 
 export default function DatePicker(props: DatePrickerProps) {
-  const { selectedMonth, selectedYear, onClickDate } = props;
+  const { selectedDateAtom } = props;
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateAtom);
 
   const START_YEAR = 2021;
   const START_MONTH = 7;
   const today = new Date();
+
+  const pickDate = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    isSelected: boolean
+  ) => {
+    if (!isSelected) {
+      setSelectedDate((current) => {
+        if (e.target instanceof HTMLButtonElement)
+          return {
+            ...current,
+            [e.target.innerText.length > 2 ? "year" : "month"]: Number(
+              e.target.innerText
+            ),
+          };
+        else return current;
+      });
+    }
+  };
 
   // useCallback 이용
   const getDateList = () => {
@@ -44,11 +60,11 @@ export default function DatePicker(props: DatePrickerProps) {
     <StDatePicker>
       <div>
         {Object.keys(dateList).map((year) => {
-          const isSelected = Number(year) === selectedYear;
+          const isSelected = Number(year) === selectedDate.year;
           return (
             <StDate
               isSelected={isSelected}
-              onClick={(e) => onClickDate(e, isSelected)}
+              onClick={(e) => pickDate(e, isSelected)}
               key={year}
             >
               {year}
@@ -57,12 +73,12 @@ export default function DatePicker(props: DatePrickerProps) {
         })}
       </div>
       <div>
-        {Object.keys(dateList[selectedYear]).map((month) => {
-          const isSelected = Number(month) === selectedMonth;
+        {Object.keys(dateList[selectedDate.year]).map((month) => {
+          const isSelected = Number(month) === selectedDate.month;
           return (
             <StDate
               isSelected={isSelected}
-              onClick={(e) => onClickDate(e, isSelected)}
+              onClick={(e) => pickDate(e, isSelected)}
               key={month}
             >
               {month}

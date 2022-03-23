@@ -1,6 +1,6 @@
 import { theme } from "styled-tools";
-import { useState } from "react";
 import styled from "styled-components";
+import { RecoilState } from "recoil";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,6 +15,7 @@ import { Line } from "react-chartjs-2";
 
 import { DatePicker } from "../";
 import { JoinInfo, WaterInfo } from "./ChartWrapper";
+import { SelectedDate } from "states";
 
 ChartJS.register(
   CategoryScale,
@@ -29,28 +30,13 @@ ChartJS.register(
 interface ChartProps {
   title: string;
   infoList: JoinInfo[] | WaterInfo[];
+  selectedDateAtom: RecoilState<SelectedDate>;
 }
 
 export default function Chart(props: ChartProps) {
-  const { title, infoList } = props;
+  const { title, infoList, selectedDateAtom } = props;
 
   const isJoin = title === "일별 가입 사용자 증가 추이";
-  const today = new Date();
-  const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
-  const [selectedYear, setSelectedYear] = useState(today.getFullYear());
-
-  const pickDate = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    isSelected: boolean
-  ) => {
-    if (!isSelected && e.target instanceof HTMLButtonElement) {
-      if (e.target.innerText.length > 2) {
-        setSelectedYear(Number(e.target.innerText));
-      } else {
-        setSelectedMonth(Number(e.target.innerText));
-      }
-    }
-  };
 
   const options = {
     responsive: false,
@@ -103,11 +89,7 @@ export default function Chart(props: ChartProps) {
     <StChart>
       <StTopWrapper>
         <StTitle>{title}</StTitle>
-        <DatePicker
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
-          onClickDate={pickDate}
-        />
+        <DatePicker selectedDateAtom={selectedDateAtom} />
       </StTopWrapper>
       <StBottomWrapper>
         <Line options={options} data={data} width="894px" height="320px" />
