@@ -33,27 +33,22 @@ export default function DatePicker(props: DatePrickerProps) {
     }
   };
 
-  // useCallback 이용
+  //useCallback 먹여
   const getDateList = () => {
-    const dateList: Array<{ [x: number]: { [x: number]: number[] }[] }> = [];
-    for (let year = START_YEAR; year <= today.getFullYear(); year) {
-      let month: number;
-      if (year === START_YEAR) month = START_MONTH;
-      else month = 1;
-      const monthList: Array<{ [x: number]: number[] }> = [];
-      for (; month <= 12; month++) {
-        const dayList: Array<number> = [];
-        const lastDay = new Date(year, month, 0).getDate();
-        for (let day = 1; day <= lastDay; day++) {
-          dayList.push(day);
-        }
-        monthList.push({ [month]: dayList });
+    const dateList = {};
+    for (let year = START_YEAR; year <= today.getFullYear(); year++) {
+      dateList[year] = new Array<number>();
+      let month = year === START_YEAR ? START_MONTH : 1;
+      for (
+        ;
+        month <= (year === today.getFullYear() ? today.getMonth() + 1 : 12);
+        month++
+      ) {
+        dateList[year].push(month);
       }
-      dateList.push({ [year]: monthList });
     }
     return dateList;
   };
-
   const dateList = getDateList();
 
   return (
@@ -73,7 +68,7 @@ export default function DatePicker(props: DatePrickerProps) {
         })}
       </div>
       <div>
-        {Object.keys(dateList[selectedDate.year]).map((month) => {
+        {dateList[selectedDate.year].map((month) => {
           const isSelected = Number(month) === selectedDate.month;
           return (
             <StDate
