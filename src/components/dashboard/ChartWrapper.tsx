@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { theme } from "styled-tools";
-import { Chart } from "../";
 
 import { client } from "utils/api";
 import { useRecoilValue } from "recoil";
@@ -10,6 +9,7 @@ import {
   SelectedDate,
   waterSelectedDateAtom,
 } from "states";
+import { Chart } from "../";
 
 export interface JoinInfo {
   date: number;

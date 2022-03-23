@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import { RecoilState, useRecoilState } from "recoil";
-import { SelectedDate } from "states";
 import styled, { css } from "styled-components";
 import { ifProp, theme } from "styled-tools";
+
+import { SelectedDate } from "states";
 
 interface DatePrickerProps {
   selectedDateAtom: RecoilState<SelectedDate>;
