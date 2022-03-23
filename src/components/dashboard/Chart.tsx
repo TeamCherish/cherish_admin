@@ -31,12 +31,11 @@ interface ChartProps {
   title: string;
   infoList: JoinInfo[] | WaterInfo[];
   selectedDateAtom: RecoilState<SelectedDate>;
+  color: string;
 }
 
 export default function Chart(props: ChartProps) {
-  const { title, infoList, selectedDateAtom } = props;
-
-  const isJoin = title === "일별 가입 사용자 증가 추이";
+  const { title, infoList, selectedDateAtom, color } = props;
 
   const options = {
     responsive: false,
@@ -80,8 +79,8 @@ export default function Chart(props: ChartProps) {
             return info.waterCount;
           }
         }),
-        borderColor: isJoin ? "#F1B0BC" : "#97CDBD",
-        backgroundColor: isJoin ? "#F1B0BC" : "#97CDBD",
+        borderColor: color,
+        backgroundColor: color,
       },
     ],
   };

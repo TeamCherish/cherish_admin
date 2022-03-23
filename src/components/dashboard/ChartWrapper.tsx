@@ -65,11 +65,13 @@ export default function ChartWrapper() {
         title="일별 가입 사용자 증가 추이"
         infoList={joinInfoList}
         selectedDateAtom={joinSelectedDateAtom}
+        color="#F1B0BC"
       />
       <Chart
         title="누적 물주기 증가 추이"
         infoList={waterInfoList}
         selectedDateAtom={waterSelectedDateAtom}
+        color="#97CDBD"
       />
     </StChartWrapper>
   );
