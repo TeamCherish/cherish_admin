@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { RecoilState, useRecoilState } from "recoil";
 import { SelectedDate } from "states";
 import styled, { css } from "styled-components";
@@ -14,42 +15,39 @@ export default function DatePicker(props: DatePrickerProps) {
   const START_YEAR = 2021;
   const START_MONTH = 7;
   const today = new Date();
+  const thisMonth = today.getMonth() + 1;
+  const thisYear = today.getFullYear();
 
-  const pickDate = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    isSelected: boolean
-  ) => {
-    if (!isSelected) {
-      setSelectedDate((current) => {
-        if (e.target instanceof HTMLButtonElement)
-          return {
-            ...current,
-            [e.target.innerText.length > 2 ? "year" : "month"]: Number(
-              e.target.innerText
-            ),
-          };
-        else return current;
-      });
-    }
-  };
-
-  //useCallback 먹여
-  const getDateList = () => {
+  const dateList = useMemo(() => {
     const dateList = {};
-    for (let year = START_YEAR; year <= today.getFullYear(); year++) {
+    for (let year = START_YEAR; year <= thisYear; year++) {
       dateList[year] = new Array<number>();
       let month = year === START_YEAR ? START_MONTH : 1;
-      for (
-        ;
-        month <= (year === today.getFullYear() ? today.getMonth() + 1 : 12);
-        month++
-      ) {
+      for (; month <= (year === thisYear ? thisMonth : 12); month++) {
         dateList[year].push(month);
       }
     }
     return dateList;
+  }, [thisMonth, thisYear]);
+
+  const pickDate = (
+    date: string | false,
+    isSelected: boolean,
+    isYear?: boolean
+  ) => {
+    if (!date) return;
+    if (!isSelected) {
+      setSelectedDate((current) => ({
+        ...current,
+        [isYear ? "year" : "month"]: Number(date),
+      }));
+      if (isYear)
+        setSelectedDate((current) => ({
+          ...current,
+          month: dateList[date][0],
+        }));
+    }
   };
-  const dateList = getDateList();
 
   return (
     <StDatePicker>
@@ -59,7 +57,13 @@ export default function DatePicker(props: DatePrickerProps) {
           return (
             <StDate
               isSelected={isSelected}
-              onClick={(e) => pickDate(e, isSelected)}
+              onClick={(e) =>
+                pickDate(
+                  e.target instanceof HTMLButtonElement && e.target.innerText,
+                  isSelected,
+                  true
+                )
+              }
               key={year}
             >
               {year}
@@ -73,7 +77,12 @@ export default function DatePicker(props: DatePrickerProps) {
           return (
             <StDate
               isSelected={isSelected}
-              onClick={(e) => pickDate(e, isSelected)}
+              onClick={(e) =>
+                pickDate(
+                  e.target instanceof HTMLButtonElement && e.target.innerText,
+                  isSelected
+                )
+              }
               key={month}
             >
               {month}
