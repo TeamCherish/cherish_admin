@@ -5,7 +5,11 @@ import { Chart } from "../";
 
 import { client } from "utils/api";
 import { useRecoilValue } from "recoil";
-import { joinSelectedDateAtom, waterSelectedDateAtom } from "states";
+import {
+  joinSelectedDateAtom,
+  SelectedDate,
+  waterSelectedDateAtom,
+} from "states";
 
 export interface JoinInfo {
   date: number;
@@ -22,33 +26,33 @@ export default function ChartWrapper() {
   const joinSelectedDate = useRecoilValue(joinSelectedDateAtom);
   const waterSelectedDate = useRecoilValue(waterSelectedDateAtom);
 
+  const getInfoList = async (
+    selectedDate: SelectedDate,
+    infoType: string,
+    setInfoList:
+      | React.Dispatch<React.SetStateAction<JoinInfo[]>>
+      | React.Dispatch<React.SetStateAction<WaterInfo[]>>
+  ) => {
+    const { data } = await client.get(`/${infoType}/per-month-report`, {
+      params: {
+        year: selectedDate.year,
+        month: selectedDate.month,
+      },
+    });
+    const lastDay = new Date(
+      selectedDate.year,
+      selectedDate.month,
+      0
+    ).getDate();
+
+    setInfoList(data.data.slice(0, lastDay));
+  };
+
   useEffect(() => {
-    (async function () {
-      const { data: joinResponse } = await client.get(
-        `/user/per-month-report`,
-        {
-          params: {
-            year: joinSelectedDate.year,
-            month: joinSelectedDate.month,
-          },
-        }
-      );
-      setJoinInfoList(joinResponse.data);
-    })();
+    getInfoList(joinSelectedDate, "user", setJoinInfoList);
   }, [joinSelectedDate]);
   useEffect(() => {
-    (async function () {
-      const { data: waterResponse } = await client.get(
-        `/contact/per-month-report`,
-        {
-          params: {
-            year: waterSelectedDate.year,
-            month: waterSelectedDate.month,
-          },
-        }
-      );
-      setWaterInfoList(waterResponse.data);
-    })();
+    getInfoList(waterSelectedDate, "contact", setWaterInfoList);
   }, [waterSelectedDate]);
 
   return (
