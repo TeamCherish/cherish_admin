@@ -86,13 +86,11 @@ export default function Chart(props: ChartProps) {
   };
   return (
     <StChart>
-      <StTopWrapper>
-        <StTitle>{title}</StTitle>
+      <div>
+        <h3>{title}</h3>
         <DatePicker selectedDateAtom={selectedDateAtom} />
-      </StTopWrapper>
-      <StBottomWrapper>
-        <Line options={options} data={data} width="894px" height="320px" />
-      </StBottomWrapper>
+      </div>
+      <Line options={options} data={data} width="894px" height="320px" />
     </StChart>
   );
 }
@@ -104,23 +102,20 @@ const StChart = styled.article`
   background-color: ${theme("colors.bgWhite")};
   width: 100%;
   height: 45.3rem;
-`;
-
-const StTopWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 4.2rem;
-  padding-top: 2.6rem;
-  width: 93rem;
-`;
-
-const StBottomWrapper = styled.div`
-  width: 89.4rem;
-  height: 32rem;
-`;
-
-const StTitle = styled.h3`
-  ${theme("fonts.korBold")};
-  font-weight: 700;
+  & > *:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4.2rem;
+    padding-top: 2.6rem;
+    width: 93rem;
+    & > h3 {
+      ${theme("fonts.korBold")};
+      font-weight: 700;
+    }
+  }
+  & > *:last-child {
+    width: 89.4rem;
+    height: 32rem;
+  }
 `;
