@@ -28,6 +28,7 @@ const StRowWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 141px;
 `;
 
 const StChartWrapper = styled.section`
