@@ -31,12 +31,9 @@ export default function DatePicker(props: DatePrickerProps) {
     return dateList;
   }, [thisMonth, thisYear]);
 
-  const pickDate = (
-    date: string | false,
-    isSelected: boolean,
-    isYear?: boolean
-  ) => {
+  const pickDate = (date: string | false, isSelected: boolean) => {
     if (!date) return;
+    const isYear = date.length > 2;
     if (!isSelected) {
       setSelectedDate((current) => ({
         ...current,
@@ -61,8 +58,7 @@ export default function DatePicker(props: DatePrickerProps) {
               onClick={(e) =>
                 pickDate(
                   e.target instanceof HTMLButtonElement && e.target.innerText,
-                  isSelected,
-                  true
+                  isSelected
                 )
               }
               key={year}
