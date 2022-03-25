@@ -7,9 +7,7 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -22,9 +20,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
-  Legend
+  Tooltip
 );
 
 interface ChartProps {
@@ -42,16 +38,6 @@ export default function Chart(props: ChartProps) {
     interaction: {
       mode: "index" as const,
       intersect: false,
-    },
-    plugins: {
-      legend: {
-        position: "top" as const,
-        display: false,
-      },
-      title: {
-        display: false,
-        text: "Chart.js Line Chart",
-      },
     },
     scales: {
       x: {
