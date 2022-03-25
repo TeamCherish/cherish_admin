@@ -57,7 +57,6 @@ export default function Chart(props: ChartProps) {
     labels,
     datasets: [
       {
-        label: "",
         data: infoList.map((info) => {
           if ("joinCount" in info) {
             return info.joinCount;
