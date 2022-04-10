@@ -1,14 +1,19 @@
 import { atom } from "recoil";
 // import { selector } from "recoil";
 
-export const articleAtom = atom({
-  key: "articleData",
-  default: [],
+export type SelectedDate = { year: number; month: number };
+
+const today = new Date();
+const defaultDate = { year: today.getFullYear(), month: today.getMonth() + 1 };
+
+export const joinSelectedDateAtom = atom<SelectedDate>({
+  key: "joinSelectedDateState",
+  default: defaultDate,
 });
 
-export const isLikeAtom = atom({
-  key: "isLike",
-  default: true,
+export const waterSelectedDateAtom = atom<SelectedDate>({
+  key: "waterSelectedDateState",
+  default: defaultDate,
 });
 
 // export const isLikeAtom = selector({
