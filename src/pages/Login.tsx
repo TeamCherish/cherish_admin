@@ -1,26 +1,9 @@
-import { useEffect, useState } from "react";
-
 import styled from "styled-components";
 import { theme } from "styled-tools";
-import { client } from "utils/api";
 import { logo } from "assets";
 import LoginWrapper from "components/login/LoginForm";
 
 export default function Login() {
-  const [temp, setTemp] = useState();
-
-  const fetch = async () => {
-    const data: any = client.get("/contact");
-    setTemp(data);
-  };
-  useEffect(() => {
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    console.log(temp);
-  }, [temp]);
-
   return (
     <StWrapper>
       <StHeader>
