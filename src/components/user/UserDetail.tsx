@@ -1,36 +1,40 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { getUserInfo } from "utils";
-import { User } from "utils/tempData";
 import { PlantList, UserInfo } from "..";
-import { plant1 } from "assets";
 import { theme } from "styled-tools";
+import { useRecoilValue } from "recoil";
+import { userDatum, UserDatum } from "states";
+import { client } from "utils/api";
 
-const TEMP_USER_ID: number = 5;
-const INITIAL_PROPS: User = {
-  id: 0,
-  image: "",
-  nickname: "temp",
-  email: "temp@temp.com",
-  phone: "0000",
-  count: "00",
-};
+export interface Plant {
+  name: string;
+  waterInterval: number;
+  lastWaterDate: string;
+  waterCount: number;
+}
 
 export default function UserDetail() {
-  const [userInfo, setUserInfo] = useState<User>(INITIAL_PROPS);
+  const [plantList, setPlantList] = useState<Plant[]>([]);
+  const user: UserDatum = useRecoilValue<UserDatum>(userDatum);
 
   useEffect(() => {
     (async function () {
-      const userData: User = await getUserInfo(TEMP_USER_ID);
-      setUserInfo({ ...userData, image: plant1 });
+      try {
+        const {
+          data: { plants },
+        } = await client.get(`/user/user/${user.id}`);
+        setPlantList(plants);
+      } catch (err) {
+        console.log("err", err);
+      }
     })();
-  }, []);
+  }, [user]);
 
   return (
     <StWrapper>
-      <UserInfo userInfo={userInfo} />
-      <PlantList />
+      <UserInfo userInfo={user} />
+      <PlantList plantList={plantList} />
     </StWrapper>
   );
 }

@@ -1,5 +1,22 @@
-import { atom } from "recoil";
-// import { selector } from "recoil";
+import { logo } from "assets";
+import { atom, RecoilState } from "recoil";
+
+export interface UserDatum {
+  id: number;
+  nickname: string;
+  email: string;
+  thumbNail: string;
+}
+
+export const userDatum: RecoilState<UserDatum> = atom({
+  key: "userInfo",
+  default: {
+    id: -1,
+    nickname: "소중이",
+    email: "cherish@test.test",
+    thumbNail: logo,
+  },
+});
 
 export type SelectedDate = { year: number; month: number };
 
@@ -16,10 +33,7 @@ export const waterSelectedDateAtom = atom<SelectedDate>({
   default: defaultDate,
 });
 
-// export const isLikeAtom = selector({
-//   key: "isLikeClicked",
-//   get: ({ get }) => {
-//     const { isLike, likeNumber } = get(articleAtom);
-//     return { status: isLike, number: likeNumber };
-//   },
-// });
+export const userTotalNum: RecoilState<number> = atom({
+  key: "userInfo",
+  default: 0,
+});

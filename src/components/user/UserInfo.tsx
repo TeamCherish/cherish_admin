@@ -1,13 +1,25 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "styled-tools";
 
-import { User } from "utils/tempData";
+interface UserInfoProps {
+  id: number;
+  nickname: string;
+  email: string;
+  thumbNail?: string;
+}
 
-export default function UserInfo(props: { userInfo: User }) {
+export default function UserInfo(props: { userInfo: UserInfoProps }) {
   const userInfo = props.userInfo;
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
   return (
     <StWrapper>
-      <img src={userInfo.image} alt="userThumbNail-1" />
+      {userInfo.thumbNail ? (
+        <img src={userInfo.thumbNail} alt="userThumbNail" />
+      ) : null}
       <StInfoWrapper>
         <span>{userInfo.nickname}</span>
         {userInfo.email}

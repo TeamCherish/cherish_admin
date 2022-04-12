@@ -14,7 +14,7 @@ export default function Dashboard() {
           <ChartWrapper />
         </StChartWrapper>
         <StUserWrapper>
-          <UserListWrapper />
+          <UserListWrapper shouldSetHeight={true} />
         </StUserWrapper>
       </StRowWrapper>
     </StContent>

@@ -6,7 +6,7 @@ import { UserDetail } from "components";
 export default function User() {
   return (
     <StWrapper>
-      <UserListWrapper />
+      <UserListWrapper shouldSetHeight={false} />
       <UserDetail />
     </StWrapper>
   );

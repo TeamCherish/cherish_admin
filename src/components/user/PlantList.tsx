@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { theme } from "styled-tools";
+import { Plant } from "./UserDetail";
 
-import { getPlantList } from "utils";
-import { Plant } from "utils/tempData";
-
-export default function PlantList() {
-  const [plantList, setPlantList] = useState<Plant[]>([]);
-
-  useEffect(() => {
-    (async function () {
-      const plantData: Plant[] = await getPlantList();
-      setPlantList(plantData);
-    })();
-  }, []);
+interface PlantListProps {
+  plantList: Plant[];
+}
+export default function PlantList(props: PlantListProps) {
+  const { plantList } = props;
 
   return (
     <StWrapper>
@@ -25,12 +18,12 @@ export default function PlantList() {
           <StRecent>최근 물주기 날짜</StRecent>
           <StAccumulated>누적 물주기</StAccumulated>
         </header>
-        {plantList.map((plant) => (
-          <ul key={plant.id}>
+        {plantList.map((plant, idx) => (
+          <ul key={`${plant.name}-${idx}`}>
             <StName>{plant.name}</StName>
-            <StName>{plant.period}일</StName>
-            <StRecent>{plant.recentDate}</StRecent>
-            <StAccumulated>{plant.accumulated}회</StAccumulated>
+            <StName>{plant.waterInterval}일</StName>
+            <StRecent>{plant.lastWaterDate}</StRecent>
+            <StAccumulated>{plant.waterCount}회</StAccumulated>
           </ul>
         ))}
       </StTable>

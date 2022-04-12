@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { theme } from "styled-tools";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import UserList from "./UserList";
 
 import { ArrowLeft, ArrowRight } from "../../assets";
+import { User } from "utils/tempData";
+import { client } from "utils/api";
+import { useRecoilValue } from "recoil";
+import { userTotalNum } from "states";
 
-export default function UserListWrapper() {
-  const MAX_PAGE = 5;
+interface Data {
+  totalPages: number;
+  totalUserCount: number;
+  users: User[];
+}
+
+interface UserListWrapperProps {
+  shouldSetHeight: boolean;
+}
+
+export default function UserListWrapper(props: UserListWrapperProps) {
+  const { shouldSetHeight } = props;
+  const [userList, setUserList] = useState<User[]>([]);
+
+  const MAX_PAGE = useRecoilValue(userTotalNum) / 20;
   const [pageCnt, setPageCnt] = useState(1);
   const [isLeftActive, setIsLeftActive] = useState(true);
   const [isRightActive, setIsRightActive] = useState(true);
@@ -30,8 +47,20 @@ export default function UserListWrapper() {
     if (newCnt >= MAX_PAGE) setIsRightActive(false);
   };
 
+  useEffect(() => {
+    (async function () {
+      const { data } = await client.get<Data>("/user", {
+        params: {
+          offset: pageCnt,
+          count: 20,
+        },
+      });
+      setUserList(data.users);
+    })();
+  }, [pageCnt]);
+
   return (
-    <StUserListWrapper>
+    <StUserListWrapper shouldset={shouldSetHeight}>
       <StHeaderWrapper>
         <StH3>사용자 목록</StH3>
         <StPageWrapper>
@@ -40,14 +69,18 @@ export default function UserListWrapper() {
           <StArrowRight onClick={goNextPage} isActive={isRightActive} />
         </StPageWrapper>
       </StHeaderWrapper>
-      <UserList pageCnt={pageCnt} />
+      <UserList userList={userList} />
     </StUserListWrapper>
   );
 }
 
-const StUserListWrapper = styled.article`
+const StUserListWrapper = styled.article<{ shouldset: boolean }>`
   width: 100%;
-  height: 100%;
+  ${({ shouldset }) =>
+    shouldset &&
+    css`
+      height: 100%;
+    `}
   padding: 3.8rem;
 
   background-color: ${theme("colors.bgWhite")};

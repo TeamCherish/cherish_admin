@@ -1,52 +1,61 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "styled-tools";
 
-import { client } from "utils/api";
 import { User } from "utils/tempData";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userDatum } from "states";
 
-interface Data {
-  totalPages: number;
-  totalUserCount: number;
-  users: User[];
-}
-export default function UserList(props: { pageCnt: number }) {
-  const [userList, setUserList] = useState<User[]>([]);
+export default function UserList(props: { userList: User[] }) {
+  const { userList } = props;
   const plantImages = [plant1, plant2, plant3, plant4, plant5];
+  const navigate = useNavigate();
+
+  const setUserDatum = useSetRecoilState(userDatum);
 
   const getRandomNum = () => {
     const randomNum = Math.floor(Math.random() * 4);
     return randomNum;
   };
 
-  useEffect(() => {
-    (async function () {
-      const { data } = await client.get<Data>("/user", {
-        params: {
-          offset: props.pageCnt,
-          count: 20,
-        },
-      });
-      setUserList(data.users);
-    })();
-  }, [props.pageCnt]);
+  const navigateUserPage = (datum: User, image: string) => {
+    navigate(`/main/user`);
+    setUserDatum({
+      id: datum.id,
+      nickname: datum.nickname,
+      email: datum.email,
+      thumbNail: image,
+    });
+  };
 
   return (
     <StUserLists>
       {userList &&
-        userList.map((userInfo) => (
-          <Link to="/main/user">
-            <StUserList>
-              <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
-              <StUserName>{userInfo.nickname}</StUserName>
-              <StUserEmail>{userInfo.email}</StUserEmail>
-              <StUserPhone>{userInfo.phone}</StUserPhone>
-              <StUserContactCnt>{userInfo.count}</StUserContactCnt>
+        userList.map((userInfo) => {
+          const userThumbNail = plantImages[getRandomNum()];
+          return (
+            <StUserList
+              title={`유저 아이디: ${userInfo.id}`}
+              key={`user-${userInfo.id}`}
+              onClick={() => navigateUserPage(userInfo, userThumbNail)}
+            >
+              <img src={userThumbNail} alt="사용자 이미지" />
+              <StUserName title={`닉네임: ${userInfo.nickname}`}>
+                {userInfo.nickname}
+              </StUserName>
+              <StUserEmail title={`이메일: ${userInfo.email}`}>
+                {userInfo.email}
+              </StUserEmail>
+              <StUserPhone title={`핸드폰번호: ${userInfo.phone}`}>
+                {userInfo.phone}
+              </StUserPhone>
+              <StUserContactCnt title={`물주기 총 횟수: ${userInfo.count}`}>
+                {userInfo.count}
+              </StUserContactCnt>
             </StUserList>
-          </Link>
-        ))}
+          );
+        })}
     </StUserLists>
   );
 }

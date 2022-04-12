@@ -1,23 +1,51 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { theme } from "styled-tools";
 import { IdIcon, PwIcon } from "assets";
+import { useState } from "react";
 
 export default function LoginWrapper() {
+  const [account, setAccount] = useState({ id: "", pwd: "" });
+  const navigate = useNavigate();
+
+  const checkIsAdmin = (e) => {
+    e.preventDefault();
+    console.log("account", account, process.env.REACT_APP_ADMIN_ID);
+    if (
+      account.id === `${process.env.REACT_APP_ADMIN_ID}` &&
+      account.pwd === `${process.env.REACT_APP_ADMIN_PWD}`
+    ) {
+      navigate("/main/dashboard");
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={checkIsAdmin}>
       <StInput>
         <IdIcon />
-        <input id="id" placeholder="아이디를 입력해주세요" />
+        <input
+          id="id"
+          value={account.id}
+          placeholder="아이디를 입력해주세요"
+          onChange={(e) =>
+            setAccount((curr) => ({ ...curr, id: e.target.value }))
+          }
+        />
       </StInput>
       <StInput>
         <PwIcon />
-        <input id="pw" type="password" placeholder="비밀번호를 입력해주세요" />
+        <input
+          id="pw"
+          type="password"
+          value={account.pwd}
+          placeholder="비밀번호를 입력해주세요"
+          onChange={(e) =>
+            setAccount((curr) => ({ ...curr, pwd: e.target.value }))
+          }
+        />
       </StInput>
-      <StLoginButton>
-        <Link to="/main/dashboard">로그인</Link>
-      </StLoginButton>
+      <StLoginButton type="submit">로그인</StLoginButton>
     </form>
   );
 }
@@ -42,7 +70,7 @@ const StInput = styled.div`
   }
 `;
 
-const StLoginButton = styled.p`
+const StLoginButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
