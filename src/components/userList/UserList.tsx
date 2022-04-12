@@ -36,14 +36,23 @@ export default function UserList(props: { userList: User[] }) {
           const userThumbNail = plantImages[getRandomNum()];
           return (
             <StUserList
+              title={`유저 아이디: ${userInfo.id}`}
               key={`user-${userInfo.id}`}
               onClick={() => navigateUserPage(userInfo, userThumbNail)}
             >
               <img src={userThumbNail} alt="사용자 이미지" />
-              <StUserName>{userInfo.nickname}</StUserName>
-              <StUserEmail>{userInfo.email}</StUserEmail>
-              <StUserPhone>{userInfo.phone}</StUserPhone>
-              <StUserContactCnt>{userInfo.count}</StUserContactCnt>
+              <StUserName title={`닉네임: ${userInfo.nickname}`}>
+                {userInfo.nickname}
+              </StUserName>
+              <StUserEmail title={`이메일: ${userInfo.email}`}>
+                {userInfo.email}
+              </StUserEmail>
+              <StUserPhone title={`핸드폰번호: ${userInfo.phone}`}>
+                {userInfo.phone}
+              </StUserPhone>
+              <StUserContactCnt title={`물주기 총 횟수: ${userInfo.count}`}>
+                {userInfo.count}
+              </StUserContactCnt>
             </StUserList>
           );
         })}
