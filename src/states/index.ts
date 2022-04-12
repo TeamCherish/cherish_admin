@@ -32,3 +32,8 @@ export const waterSelectedDateAtom = atom<SelectedDate>({
   key: "waterSelectedDateState",
   default: defaultDate,
 });
+
+export const userTotalNum: RecoilState<number> = atom({
+  key: "userInfo",
+  default: 0,
+});

@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { theme } from "styled-tools";
 
-export default function Summary({
-  summaryIcon,
-  summaryText,
-  dataNumber,
-  dataVariation,
-}) {
+interface SummaryProps {
+  summaryIcon: string;
+  summaryText: string;
+  dataNumber: string | number;
+  dataVariation: number;
+}
+
+export default function Summary(props: SummaryProps) {
+  const { summaryIcon, summaryText, dataNumber, dataVariation } = props;
+
   return (
     <StSummaryBox>
       <StSummaryIcon src={summaryIcon}></StSummaryIcon>
@@ -14,7 +18,13 @@ export default function Summary({
         <h3>{summaryText}</h3>
         <StSummaryData>
           <StDataNumber>{dataNumber}</StDataNumber>
-          <StDataVariation>{dataVariation}</StDataVariation>
+          {dataVariation ? (
+            <StDataVariation>
+              {dataVariation > 0
+                ? `( +${dataVariation} )`
+                : `( ${dataVariation} )`}
+            </StDataVariation>
+          ) : null}
         </StSummaryData>
       </StSummaryText>
     </StSummaryBox>

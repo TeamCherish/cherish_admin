@@ -1,22 +1,14 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { theme } from "styled-tools";
 
-import { client } from "utils/api";
 import { User } from "utils/tempData";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userDatum } from "states";
 
-interface Data {
-  totalPages: number;
-  totalUserCount: number;
-  users: User[];
-}
-
-export default function UserList(props: { pageCnt: number }) {
-  const [userList, setUserList] = useState<User[]>([]);
+export default function UserList(props: { userList: User[] }) {
+  const { userList } = props;
   const plantImages = [plant1, plant2, plant3, plant4, plant5];
   const navigate = useNavigate();
 
@@ -36,18 +28,6 @@ export default function UserList(props: { pageCnt: number }) {
       thumbNail: image,
     });
   };
-
-  useEffect(() => {
-    (async function () {
-      const { data } = await client.get<Data>("/user", {
-        params: {
-          offset: props.pageCnt,
-          count: 20,
-        },
-      });
-      setUserList(data.users);
-    })();
-  }, [props.pageCnt]);
 
   return (
     <StUserLists>
