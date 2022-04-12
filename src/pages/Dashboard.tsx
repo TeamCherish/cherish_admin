@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "styled-tools";
+
 import SummaryWrapper from "components/dashboard/SummaryWrapper";
 import ChartWrapper from "components/dashboard/ChartWrapper";
 import UserListWrapper from "components/userList/UserListWrapper";
@@ -28,6 +29,7 @@ const StRowWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 141px;
 `;
 
 const StChartWrapper = styled.section`
