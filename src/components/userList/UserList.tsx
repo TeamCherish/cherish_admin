@@ -5,20 +5,36 @@ import { theme } from "styled-tools";
 import { client } from "utils/api";
 import { User } from "utils/tempData";
 import { plant1, plant2, plant3, plant4, plant5 } from "assets";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userDatum } from "states";
 
 interface Data {
   totalPages: number;
   totalUserCount: number;
   users: User[];
 }
+
 export default function UserList(props: { pageCnt: number }) {
   const [userList, setUserList] = useState<User[]>([]);
   const plantImages = [plant1, plant2, plant3, plant4, plant5];
+  const navigate = useNavigate();
+
+  const setUserDatum = useSetRecoilState(userDatum);
 
   const getRandomNum = () => {
     const randomNum = Math.floor(Math.random() * 4);
     return randomNum;
+  };
+
+  const navigateUserPage = (datum: User, image: string) => {
+    navigate(`/main/user`);
+    setUserDatum({
+      id: datum.id,
+      nickname: datum.nickname,
+      email: datum.email,
+      thumbNail: image,
+    });
   };
 
   useEffect(() => {
@@ -36,17 +52,21 @@ export default function UserList(props: { pageCnt: number }) {
   return (
     <StUserLists>
       {userList &&
-        userList.map((userInfo) => (
-          <Link to="/main/user">
-            <StUserList>
-              <img src={plantImages[getRandomNum()]} alt="사용자 이미지" />
+        userList.map((userInfo) => {
+          const userThumbNail = plantImages[getRandomNum()];
+          return (
+            <StUserList
+              key={`user-${userInfo.id}`}
+              onClick={() => navigateUserPage(userInfo, userThumbNail)}
+            >
+              <img src={userThumbNail} alt="사용자 이미지" />
               <StUserName>{userInfo.nickname}</StUserName>
               <StUserEmail>{userInfo.email}</StUserEmail>
               <StUserPhone>{userInfo.phone}</StUserPhone>
               <StUserContactCnt>{userInfo.count}</StUserContactCnt>
             </StUserList>
-          </Link>
-        ))}
+          );
+        })}
     </StUserLists>
   );
 }
